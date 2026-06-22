@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Louis Berenyi — Portfolio</title>
+<meta name="description" content="Louis Berenyi — Computer Science (Co-op) at the University of Ottawa. Systems software, machine-learning tooling, and open-source.">
+<script>try{var t=localStorage.getItem('lb-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  :root{
+    --bg:#f7f6f3; --fg:#191917; --muted:#6c6b64; --faint:#a3a299;
+    --line:rgba(20,20,18,0.10); --card:#ffffff; --card2:#f0efea;
+    --accent:#2b5fd9; --accent-soft:rgba(43,95,217,0.08);
+    --ui-font:'Geist','Helvetica Neue',Arial,sans-serif;
+    --display-font:'Geist','Helvetica Neue',Arial,sans-serif;
+  }
+  [data-theme="dark"]{
+    --bg:#0c0c0e; --fg:#ededee; --muted:#8c8c92; --faint:#56565c;
+    --line:rgba(255,255,255,0.12); --card:#161619; --card2:#1c1c20;
+    --accent:#7099ff; --accent-soft:rgba(112,153,255,0.13);
+  }
+  body{background:var(--bg);}
+  ::selection{background:var(--accent);color:#fff;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+  /* hover behaviors (replace DC style-hover) */
+  .btn:hover{color:var(--fg)!important;border-color:var(--fg)!important;}
+  .pill:hover{border-color:var(--accent)!important;color:var(--accent)!important;background:var(--accent-soft)!important;}
+  .ul:hover{border-bottom-color:var(--accent)!important;}
+  .card:hover{color:var(--accent)!important;background:var(--accent-soft)!important;transform:translateX(4px)!important;}
+  .mlink:hover{color:var(--accent)!important;}
+</style>
+</head>
+<body>
+<div id="top" style="min-height:100vh;background:var(--bg);color:var(--fg);font-family:var(--ui-font);transition:background .45s ease,color .45s ease;-webkit-font-smoothing:antialiased;">
+
+  <header style="max-width:760px;margin:0 auto;padding:28px 24px 12px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="#top" style="font-family:'Geist Mono',monospace;font-size:12.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--fg);text-decoration:none;display:flex;align-items:center;gap:10px;">
+      Louis Berenyi
+    </a>
+    <div style="display:flex;gap:8px;">
+      <button id="cmdBtn" class="btn" title="Command menu" style="height:34px;padding:0 11px;display:flex;align-items:center;gap:5px;background:transparent;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-family:'Geist Mono',monospace;font-size:12px;cursor:pointer;transition:all .15s ease;">
+        <span style="font-size:13px;">⌘</span><span>K</span>
+      </button>
+      <button id="themeBtn" class="btn" title="Toggle theme" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:15px;cursor:pointer;transition:all .15s ease;">☾</button>
+    </div>
+  </header>
+
+  <main style="max-width:760px;margin:0 auto;padding:0 24px 40px;">
+
+    <section style="padding:52px 0 8px;animation:fadeUp .7s ease both;">
+      <h1 style="margin:0;font-size:clamp(40px,6.5vw,62px);font-weight:500;letter-spacing:-0.025em;line-height:1.0;font-family:var(--display-font);">Louis Berenyi</h1>
+      <p style="margin:16px 0 0;font-family:'Geist Mono',monospace;font-size:13.5px;letter-spacing:0.01em;color:var(--muted);">Computer Science (Co-op) · University of Ottawa</p>
+      <p style="margin:26px 0 0;max-width:552px;font-size:18px;line-height:1.62;color:var(--fg);">I build systems software, machine-learning tooling, and open-source projects — from a 1.7k-star terminal multiplexer to quantizing language models into tight memory budgets.</p>
+      <div style="margin-top:30px;font-family:'Geist Mono',monospace;font-size:13px;">
+        <div style="display:flex;flex-wrap:wrap;gap:10px;">
+          <a href="https://github.com/LUIDevo" target="_blank" rel="noopener" class="pill" style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border:1px solid var(--accent);border-radius:999px;color:var(--accent);text-decoration:none;transition:all .18s ease;">GitHub ↗</a>
+          <a href="mailto:lbere033@uottawa.ca" class="pill" style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border:1px solid var(--accent);border-radius:999px;color:var(--accent);text-decoration:none;transition:all .18s ease;">Email ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div style="display:flex;align-items:center;gap:16px;margin:74px 0 4px;">
+        <span style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);">Selected Work</span>
+        <span style="flex:1;height:1px;background:var(--line);"></span>
+        <span style="font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--faint);">04</span>
+      </div>
+      <div style="border-bottom:1px solid var(--line);">
+
+        <a href="project.html?p=parameter-golf" class="card" style="display:grid;grid-template-columns:32px 1fr auto;gap:18px;align-items:start;padding:24px 10px;border-top:1px solid var(--line);text-decoration:none;color:var(--fg);transition:color .18s ease,background .18s ease,transform .18s ease;border-radius:8px;">
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);padding-top:6px;">01</span>
+          <div>
+            <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+              <span style="font-size:21px;font-weight:500;letter-spacing:-0.01em;font-family:var(--display-font);">Parameter Golf</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);">2025</span>
+            </div>
+            <p style="margin:7px 0 0;font-size:14.5px;line-height:1.55;color:var(--muted);max-width:520px;">Compressed a GPT-style transformer to a hard 16 MB budget with quantization-aware training and int6 weights.</p>
+            <div style="margin-top:13px;display:flex;flex-wrap:wrap;gap:6px;">
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;">Python</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;">NumPy</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;">QAT</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;">RunPod</span>
+            </div>
+          </div>
+          <span style="font-family:'Geist Mono',monospace;font-size:14px;color:var(--faint);padding-top:4px;">↗</span>
+        </a>
+
+        <a href="project.html?p=rmux" class="card" style="display:grid;grid-template-columns:32px 1fr auto;gap:18px;align-items:start;padding:24px 10px;border-top:1px solid var(--line);text-decoration:none;color:var(--fg);transition:color .18s ease,background .18s ease,transform .18s ease;border-radius:8px;">
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);padding-top:6px;">02</span>
+          <div>
+            <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+              <span style="font-size:21px;font-weight:500;letter-spacing:-0.01em;font-family:var(--display-font);">rmux</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);">Open Source · 1.7k ★</span>
+            </div>
+            <p style="margin:7px 0 0;font-size:14.5px;line-height:1.55;color:var(--muted);max-width:520px;">Fixed a silent pane-base-index bug across three subsystems of a 1.7k-star terminal multiplexer, with regression tests.</p>
+            <div style="margin-top:13px;display:flex;flex-wrap:wrap;gap:6px;">
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;">Rust</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;">Open Source</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;">Systems</span>
+            </div>
+          </div>
+          <span style="font-family:'Geist Mono',monospace;font-size:14px;color:var(--faint);padding-top:4px;">↗</span>
+        </a>
+
+        <a href="project.html?p=robotics-platform" class="card" style="display:grid;grid-template-columns:32px 1fr auto;gap:18px;align-items:start;padding:24px 10px;border-top:1px solid var(--line);text-decoration:none;color:var(--fg);transition:color .18s ease,background .18s ease,transform .18s ease;border-radius:8px;">
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);padding-top:6px;">03</span>
+          <div>
+            <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+              <span style="font-size:21px;font-weight:500;letter-spacing:-0.01em;font-family:var(--display-font);">Robotics Scouting Platform</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);">2024</span>
+            </div>
+            <p style="margin:7px 0 0;font-size:14.5px;line-height:1.55;color:var(--muted);max-width:520px;">Full-stack analytics platform turning raw scouting data into AI-generated match strategy for a 30–40 person team.</p>
+            <div style="margin-top:13px;display:flex;flex-wrap:wrap;gap:6px;">
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;">React</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;">GraphQL</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;">Prisma</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;">Gemini</span>
+            </div>
+          </div>
+          <span style="font-family:'Geist Mono',monospace;font-size:14px;color:var(--faint);padding-top:4px;">↗</span>
+        </a>
+
+        <a href="project.html?p=match-logging" class="card" style="display:grid;grid-template-columns:32px 1fr auto;gap:18px;align-items:start;padding:24px 10px;border-top:1px solid var(--line);text-decoration:none;color:var(--fg);transition:color .18s ease,background .18s ease,transform .18s ease;border-radius:8px;">
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);padding-top:6px;">04</span>
+          <div>
+            <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+              <span style="font-size:21px;font-weight:500;letter-spacing:-0.01em;font-family:var(--display-font);">Offline-First Match-Logging App</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);">2024</span>
+            </div>
+            <p style="margin:7px 0 0;font-size:14.5px;line-height:1.55;color:var(--muted);max-width:520px;">Zero-dependency offline-first client that captured 1,300+ match logs live, syncing to a Node service on reconnect.</p>
+            <div style="margin-top:13px;display:flex;flex-wrap:wrap;gap:6px;">
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;">Vanilla JS</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;">TypeScript</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;">Node.js</span>
+            </div>
+          </div>
+          <span style="font-family:'Geist Mono',monospace;font-size:14px;color:var(--faint);padding-top:4px;">↗</span>
+        </a>
+
+      </div>
+    </section>
+
+    <section>
+      <div style="display:flex;align-items:center;gap:16px;margin:74px 0 4px;">
+        <span style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);">Also</span>
+        <span style="flex:1;height:1px;background:var(--line);"></span>
+      </div>
+      <div style="border-bottom:1px solid var(--line);">
+        <a href="project.html?p=yapchain" class="card" style="display:grid;grid-template-columns:1fr auto;gap:18px;align-items:baseline;padding:18px 10px;border-top:1px solid var(--line);text-decoration:none;color:var(--fg);transition:color .18s ease,background .18s ease,transform .18s ease;border-radius:8px;">
+          <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+            <span style="font-size:16.5px;font-weight:500;">Yapchain</span>
+            <span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--muted);">Decentralized social app · Winner, Best Use of NEAR — JamHacks 2024</span>
+          </div>
+          <span style="font-family:'Geist Mono',monospace;font-size:13px;color:var(--faint);">↗</span>
+        </a>
+        <a href="project.html?p=spud" class="card" style="display:grid;grid-template-columns:1fr auto;gap:18px;align-items:baseline;padding:18px 10px;border-top:1px solid var(--line);text-decoration:none;color:var(--fg);transition:color .18s ease,background .18s ease,transform .18s ease;border-radius:8px;">
+          <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+            <span style="font-size:16.5px;font-weight:500;">spud</span>
+            <span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--muted);">Rust CLI for YouTube → Spotify music, OAuth · 13 ★</span>
+          </div>
+          <span style="font-family:'Geist Mono',monospace;font-size:13px;color:var(--faint);">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div style="display:flex;align-items:center;gap:16px;margin:74px 0 4px;">
+        <span style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);">Experience</span>
+        <span style="flex:1;height:1px;background:var(--line);"></span>
+      </div>
+      <div style="border-bottom:1px solid var(--line);">
+
+        <div style="display:grid;grid-template-columns:130px 1fr;gap:18px;padding:22px 10px;border-top:1px solid var(--line);">
+          <div style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);">2022 — 2024</div>
+          <div>
+            <div style="font-size:16.5px;font-weight:500;">Independent Web Development Contractor</div>
+            <div style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--muted);margin-top:4px;">Freelance · Remote</div>
+            <p style="margin:9px 0 0;font-size:14.5px;line-height:1.55;color:var(--muted);max-width:540px;">Delivered and maintained custom websites for 5 clients as sole developer and point of contact — owning requirements, build, revisions, and ongoing maintenance.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="stack">
+      <div style="display:flex;align-items:center;gap:16px;margin:74px 0 4px;">
+        <span style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);">Stack</span>
+        <span style="flex:1;height:1px;background:var(--line);"></span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 28px;padding-top:28px;">
+        <div>
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--faint);">Languages</div>
+          <div style="margin-top:9px;font-size:14.5px;line-height:1.7;color:var(--fg);">Rust · TypeScript · JavaScript · Python · Java · SQL</div>
+        </div>
+        <div>
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--faint);">Web & Backend</div>
+          <div style="margin-top:9px;font-size:14.5px;line-height:1.7;color:var(--fg);">React · Next.js · Svelte · Node · Express · GraphQL · Prisma · Tailwind</div>
+        </div>
+        <div>
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--faint);">ML & Data</div>
+          <div style="margin-top:9px;font-size:14.5px;line-height:1.7;color:var(--fg);">Transformers · Quantization-aware training · Vector search · SQLite</div>
+        </div>
+        <div>
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--faint);">Tools</div>
+          <div style="margin-top:9px;font-size:14.5px;line-height:1.7;color:var(--fg);">Git · Linux · Neovim · Docker · RunPod · SSH · Tmux</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" style="margin-top:100px;">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:22px;">
+        <span style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);">Contact</span>
+        <span style="flex:1;height:1px;background:var(--line);"></span>
+      </div>
+      <h2 style="margin:0;font-size:clamp(28px,4.5vw,40px);font-weight:500;letter-spacing:-0.02em;line-height:1.1;font-family:var(--display-font);">Let's build something good.</h2>
+      <a href="mailto:lbere033@uottawa.ca" class="ul" style="display:inline-block;margin-top:20px;font-size:21px;color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s ease;">lbere033@uottawa.ca</a>
+      <div style="margin-top:22px;display:flex;flex-wrap:wrap;gap:10px 24px;font-family:'Geist Mono',monospace;font-size:13px;">
+        <a href="https://github.com/LUIDevo" target="_blank" rel="noopener" class="mlink" style="color:var(--muted);text-decoration:none;transition:color .15s ease;">github.com/LUIDevo ↗</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer style="max-width:760px;margin:0 auto;padding:40px 24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--faint);">
+    <span>Toronto, ON · <span id="clock"></span></span>
+    <span>© 2026 Louis Berenyi</span>
+  </footer>
+
+  <div id="cmdOverlay" style="display:none;position:fixed;inset:0;z-index:60;background:rgba(8,8,10,0.45);backdrop-filter:blur(3px);align-items:flex-start;justify-content:center;padding:13vh 20px 20px;animation:fadeUp .18s ease both;">
+    <div id="cmdPanel" style="width:min(540px,100%);background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,0.35);overflow:hidden;">
+      <div style="display:flex;align-items:center;gap:10px;padding:15px 17px;border-bottom:1px solid var(--line);">
+        <span style="font-family:'Geist Mono',monospace;font-size:13px;color:var(--faint);">⌘</span>
+        <input id="cmdInput" placeholder="Search projects, sections, actions…" style="flex:1;border:none;outline:none;background:transparent;color:var(--fg);font-family:'Geist','Helvetica Neue',Arial,sans-serif;font-size:15px;" />
+      </div>
+      <div id="cmdList" style="max-height:52vh;overflow:auto;padding:8px;"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+
+  // --- theme ---
+  function stored() { try { return localStorage.getItem('lb-theme'); } catch (e) { return null; } }
+  function applyTheme(t) { try { root.setAttribute('data-theme', t); } catch (e) {} }
+  var theme = stored() || 'light';
+  applyTheme(theme);
+  function glyph() { return theme === 'dark' ? '☀' : '☾'; }
+  var themeBtn = document.getElementById('themeBtn');
+  themeBtn.textContent = glyph();
+  function toggleTheme() {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('lb-theme', theme); } catch (e) {}
+    applyTheme(theme);
+    themeBtn.textContent = glyph();
+  }
+  themeBtn.addEventListener('click', toggleTheme);
+
+  // --- clock ---
+  var clockEl = document.getElementById('clock');
+  function now() {
+    try { return new Date().toLocaleTimeString('en-CA', { hour12: false, timeZone: 'America/Toronto' }); }
+    catch (e) { return new Date().toLocaleTimeString(); }
+  }
+  clockEl.textContent = now();
+  setInterval(function () { clockEl.textContent = now(); }, 1000);
+
+  // --- command menu ---
+  var overlay = document.getElementById('cmdOverlay');
+  var panel = document.getElementById('cmdPanel');
+  var input = document.getElementById('cmdInput');
+  var listEl = document.getElementById('cmdList');
+  var selected = 0;
+
+  function go(id) {
+    var el = document.getElementById(id);
+    if (el) window.scrollTo({ top: el.offsetTop - 28, behavior: 'smooth' });
+    closeCmd();
+  }
+  function nav(u) { window.location.href = u; }
+  function ext(u) { window.open(u, '_blank', 'noopener'); closeCmd(); }
+  function copyEmail() { try { navigator.clipboard.writeText('lbere033@uottawa.ca'); } catch (e) {} closeCmd(); }
+
+  var commands = [
+    { label: 'Selected Work', hint: 'Section', run: function () { go('work'); } },
+    { label: 'Experience', hint: 'Section', run: function () { go('experience'); } },
+    { label: 'Stack', hint: 'Section', run: function () { go('stack'); } },
+    { label: 'Contact', hint: 'Section', run: function () { go('contact'); } },
+    { label: 'Parameter Golf', hint: 'Project', run: function () { nav('project.html?p=parameter-golf'); } },
+    { label: 'rmux', hint: 'Project', run: function () { nav('project.html?p=rmux'); } },
+    { label: 'Robotics Scouting Platform', hint: 'Project', run: function () { nav('project.html?p=robotics-platform'); } },
+    { label: 'Offline-First Match-Logging App', hint: 'Project', run: function () { nav('project.html?p=match-logging'); } },
+    { label: 'Yapchain', hint: 'Project', run: function () { nav('project.html?p=yapchain'); } },
+    { label: 'spud', hint: 'Project', run: function () { nav('project.html?p=spud'); } },
+    { label: 'Toggle theme', hint: 'Action', run: function () { toggleTheme(); closeCmd(); } },
+    { label: 'Copy email', hint: 'Action', run: function () { copyEmail(); } },
+    { label: 'GitHub', hint: 'External', run: function () { ext('https://github.com/LUIDevo'); } },
+    { label: 'Email me', hint: 'External', run: function () { ext('mailto:lbere033@uottawa.ca'); } }
+  ];
+
+  function filtered() {
+    var q = (input.value || '').toLowerCase();
+    return commands.filter(function (c) { return (c.label + ' ' + c.hint).toLowerCase().indexOf(q) !== -1; });
+  }
+
+  function renderList() {
+    var items = filtered();
+    if (selected > items.length - 1) selected = items.length - 1;
+    if (selected < 0) selected = 0;
+    listEl.innerHTML = '';
+    items.forEach(function (c, i) {
+      var active = i === selected;
+      var row = document.createElement('div');
+      row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;cursor:pointer;border-radius:9px;transition:background .12s ease;color:' + (active ? 'var(--accent)' : 'var(--fg)') + ';background:' + (active ? 'var(--accent-soft)' : 'transparent') + ';';
+      var l = document.createElement('span'); l.style.fontSize = '14px'; l.textContent = c.label;
+      var h = document.createElement('span'); h.style.cssText = "font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--faint);text-transform:uppercase;letter-spacing:0.07em;"; h.textContent = c.hint;
+      row.appendChild(l); row.appendChild(h);
+      row.addEventListener('mouseenter', function () { selected = i; renderList(); });
+      row.addEventListener('click', function () { c.run(); });
+      listEl.appendChild(row);
+    });
+  }
+
+  function openCmd() {
+    overlay.style.display = 'flex';
+    input.value = ''; selected = 0; renderList();
+    setTimeout(function () { try { input.focus(); } catch (e) {} }, 0);
+  }
+  function closeCmd() { overlay.style.display = 'none'; }
+
+  document.getElementById('cmdBtn').addEventListener('click', openCmd);
+  overlay.addEventListener('click', closeCmd);
+  panel.addEventListener('click', function (e) { e.stopPropagation(); });
+  input.addEventListener('input', function () { selected = 0; renderList(); });
+  input.addEventListener('keydown', function (e) {
+    var items = filtered();
+    if (e.key === 'ArrowDown') { e.preventDefault(); selected = Math.min(selected + 1, items.length - 1); renderList(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); selected = Math.max(selected - 1, 0); renderList(); }
+    else if (e.key === 'Enter') { e.preventDefault(); var c = items[selected]; if (c) c.run(); }
+    else if (e.key === 'Escape') { closeCmd(); }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+      e.preventDefault();
+      overlay.style.display === 'flex' ? closeCmd() : openCmd();
+    } else if (e.key === 'Escape' && overlay.style.display === 'flex') {
+      closeCmd();
+    }
+  });
+})();
+</script>
+</body>
+</html>

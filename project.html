@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project — Louis Berenyi</title>
+<script>try{var t=localStorage.getItem('lb-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  :root{
+    --bg:#f7f6f3; --fg:#191917; --muted:#6c6b64; --faint:#a3a299;
+    --line:rgba(20,20,18,0.10); --card:#ffffff; --card2:#f0efea;
+    --accent:#2b5fd9; --accent-soft:rgba(43,95,217,0.08);
+  }
+  [data-theme="dark"]{
+    --bg:#0c0c0e; --fg:#ededee; --muted:#8c8c92; --faint:#56565c;
+    --line:rgba(255,255,255,0.12); --card:#161619; --card2:#1c1c20;
+    --accent:#7099ff; --accent-soft:rgba(112,153,255,0.13);
+  }
+  body{background:var(--bg);}
+  ::selection{background:var(--accent);color:#fff;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+  @keyframes stripe{from{background-position:0 0;}to{background-position:40px 0;}}
+  /* hover behaviors (replace DC style-hover) */
+  .btn:hover{color:var(--fg)!important;border-color:var(--fg)!important;}
+  .flink:hover{color:var(--fg)!important;}
+  .ul:hover{border-bottom-color:var(--accent)!important;}
+  .next:hover{color:var(--accent)!important;background:var(--accent-soft)!important;}
+</style>
+</head>
+<body>
+<div id="top" style="min-height:100vh;background:var(--bg);color:var(--fg);font-family:'Geist','Helvetica Neue',Arial,sans-serif;transition:background .45s ease,color .45s ease;-webkit-font-smoothing:antialiased;">
+
+  <header style="max-width:720px;margin:0 auto;padding:28px 24px 12px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" class="flink" style="font-family:'Geist Mono',monospace;font-size:12.5px;letter-spacing:0.06em;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:9px;transition:color .15s ease;">
+      <span style="font-size:14px;">←</span> Index
+    </a>
+    <button id="themeBtn" class="btn" title="Toggle theme" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:15px;cursor:pointer;transition:all .15s ease;">☾</button>
+  </header>
+
+  <main style="max-width:720px;margin:0 auto;padding:0 24px 40px;animation:fadeUp .6s ease both;">
+
+    <div style="display:flex;align-items:center;gap:12px;margin:44px 0 0;font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);">
+      <span id="p-num"></span>
+      <span style="width:18px;height:1px;background:var(--line);"></span>
+      <span id="p-kind" style="text-transform:uppercase;letter-spacing:0.1em;"></span>
+    </div>
+
+    <h1 id="p-title" style="margin:18px 0 0;font-size:clamp(34px,5.5vw,52px);font-weight:500;letter-spacing:-0.025em;line-height:1.04;"></h1>
+    <p id="p-sub" style="margin:14px 0 0;font-size:18px;line-height:1.5;color:var(--muted);max-width:560px;"></p>
+
+    <div id="p-stack" style="margin-top:26px;display:flex;flex-wrap:wrap;gap:8px;"></div>
+
+    <div id="p-links" style="margin-top:28px;display:flex;flex-wrap:wrap;gap:10px 22px;font-family:'Geist Mono',monospace;font-size:13px;"></div>
+
+    <div style="margin-top:40px;aspect-ratio:16/9;border:1px solid var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;background-color:var(--card2);background-image:repeating-linear-gradient(135deg,transparent 0,transparent 9px,var(--line) 9px,var(--line) 10px);overflow:hidden;">
+      <span id="p-caption" style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);background:var(--bg);padding:6px 12px;border-radius:6px;border:1px solid var(--line);"></span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:130px 1fr;gap:18px;margin-top:54px;">
+      <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint);padding-top:5px;">Overview</div>
+      <div id="p-overview"></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:130px 1fr;gap:18px;margin-top:40px;padding-top:40px;border-top:1px solid var(--line);">
+      <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint);padding-top:5px;">Highlights</div>
+      <div id="p-highlights"></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:130px 1fr;gap:18px;margin-top:40px;">
+      <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint);padding-top:5px;">Details</div>
+      <div style="display:flex;flex-wrap:wrap;gap:28px 56px;">
+        <div>
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--faint);">Year</div>
+          <div id="p-year" style="margin-top:6px;font-size:15px;color:var(--fg);"></div>
+        </div>
+        <div>
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--faint);">Role</div>
+          <div id="p-role" style="margin-top:6px;font-size:15px;color:var(--fg);"></div>
+        </div>
+      </div>
+    </div>
+
+    <a id="p-next" href="#" class="next" style="display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:64px;padding:28px 22px;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--fg);transition:color .18s ease,background .18s ease;">
+      <div>
+        <div style="font-family:'Geist Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--faint);">Next</div>
+        <div id="p-next-title" style="margin-top:6px;font-size:20px;font-weight:500;letter-spacing:-0.01em;"></div>
+      </div>
+      <span style="font-family:'Geist Mono',monospace;font-size:18px;color:var(--faint);">↗</span>
+    </a>
+
+  </main>
+
+  <footer style="max-width:720px;margin:0 auto;padding:40px 24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--faint);">
+    <a href="index.html" class="flink" style="color:var(--faint);text-decoration:none;transition:color .15s ease;">← Back to index</a>
+    <span>© 2026 Louis Berenyi</span>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+
+  // --- theme ---
+  function stored() { try { return localStorage.getItem('lb-theme'); } catch (e) { return null; } }
+  function applyTheme(t) { try { root.setAttribute('data-theme', t); } catch (e) {} }
+  var theme = stored() || 'light';
+  applyTheme(theme);
+  var themeBtn = document.getElementById('themeBtn');
+  themeBtn.textContent = theme === 'dark' ? '☀' : '☾';
+  themeBtn.addEventListener('click', function () {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('lb-theme', theme); } catch (e) {}
+    applyTheme(theme);
+    themeBtn.textContent = theme === 'dark' ? '☀' : '☾';
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') window.location.href = 'index.html';
+  });
+
+  // --- project data ---
+  var data = {
+    'parameter-golf': {
+      num: '01', kind: 'ML / Optimization', title: 'Parameter Golf',
+      sub: 'Quantizing a language model into a hard 16 MB memory budget under a time limit.',
+      year: '2025', role: 'Solo',
+      stack: ['Python', 'NumPy', 'QAT', 'int6', 'RunPod', 'SSH'],
+      links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }],
+      caption: 'training-run dashboard',
+      overview: [
+        'Parameter Golf was a constrained-optimization challenge: take a provided GPT-style transformer language model and compress it to fit inside a hard 16 MB budget — without watching quality collapse.',
+        'I approached it with quantization-aware training and a staged int8 → int6 weight quantization, dropping roughly 25% of the bits per weight while keeping the model coherent.'
+      ],
+      highlights: [
+        'Quantization-aware training (QAT) with int8 → int6 weights — 25% fewer bits per weight inside a hard 16 MB budget.',
+        'Added stochastic weight averaging and weight EMA for training stability across runs.',
+        'Ran experiments on rented cloud GPUs (RunPod over SSH) with a custom logging system to track and compare runs across the train/eval loop.'
+      ]
+    },
+    'rmux': {
+      num: '02', kind: 'Open Source · Rust', title: 'rmux',
+      sub: 'A pane-indexing fix across three subsystems of a 1.7k-star terminal multiplexer.',
+      year: '2024', role: 'Contributor',
+      stack: ['Rust', 'Systems', 'Open Source'],
+      links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }],
+      caption: 'terminal panes',
+      overview: [
+        'rmux is a terminal multiplexer with around 1.7k GitHub stars. I diagnosed and fixed a configuration bug where the pane-base-index option was silently ignored — panes stayed 0-indexed regardless of the user’s config.',
+        'The root cause spanned three subsystems, so the fix had to be consistent everywhere a pane index is surfaced.'
+      ],
+      highlights: [
+        'Traced a silent pane-base-index bug across three subsystems: display-panes, list-panes, and #P status-line formatting.',
+        'Implemented a shared helper applying the configured offset consistently across every affected path.',
+        'Added regression tests covering pane labels and ListPanes output.'
+      ]
+    },
+    'robotics-platform': {
+      num: '03', kind: 'Full-Stack · AI', title: 'Robotics Scouting & Strategy Platform',
+      sub: 'Turning raw scouting data into AI-generated match strategy for a 30–40 person team.',
+      year: '2024', role: 'Architect',
+      stack: ['React', 'GraphQL', 'Apollo', 'Prisma', 'SQLite', 'Gemini API'],
+      links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }],
+      caption: 'strategy dashboard',
+      overview: [
+        'A full-stack analytics platform (React + GraphQL/Apollo + Prisma) that converts raw scouting data into AI-generated match strategy, replacing manual spreadsheet workflows for a 30–40 person robotics team.',
+        'It is backed by an offline-first local database that mirrors stats from a third-party competition API, so analysis keeps working at venues with flaky networks.'
+      ],
+      highlights: [
+        'Built an LLM strategy engine that assembles structured prompts from team stats and game rules, calling the Gemini API for styled HTML breakdowns of any two alliances.',
+        'Added nearest-neighbor opponent lookup over 7-dimensional embeddings.',
+        'Layered in NLP sentiment scoring of scout notes to surface qualitative signal alongside the numbers.'
+      ]
+    },
+    'match-logging': {
+      num: '04', kind: 'Offline-First', title: 'Offline-First Match-Logging App',
+      sub: 'A zero-dependency client that captured 1,300+ match logs live, with no network.',
+      year: '2024', role: 'Solo',
+      stack: ['Vanilla JS', 'HTML/CSS', 'TypeScript', 'Node.js'],
+      links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }],
+      caption: 'logging interface',
+      overview: [
+        'A framework-free, zero-dependency client built in vanilla HTML/CSS/JS — no build step and no runtime deps, so it runs in any browser on any device and works fully offline. Offline operation was a hard requirement at competition venues with no network.',
+        'A companion TypeScript/Node service persisted submissions to a central database once connectivity returned.'
+      ],
+      highlights: [
+        'Captured 1,300+ match logs in live competition across a team of 30–40 people.',
+        'Built the entire client with no build step or runtime dependencies — it just opens and runs.',
+        'Queued and synced submissions to the Node service automatically once a connection came back.'
+      ]
+    },
+    'yapchain': {
+      num: '05', kind: 'Web3 · Hackathon', title: 'Yapchain',
+      sub: 'A decentralized, proximity-based social app where users own their data.',
+      year: '2024', role: 'Team',
+      stack: ['React', 'Next.js', 'Express', 'NEAR'],
+      links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }],
+      caption: 'canvas chat rooms',
+      overview: [
+        'Yapchain is a decentralized, proximity-based social app built on the NEAR blockchain, where users own their own data. It won Best Use of NEAR at JamHacks 2024.',
+        'Chat rooms are navigable and rendered on an HTML canvas, with an on-ledger feed of anonymous posts.'
+      ],
+      highlights: [
+        'Winner — Best Use of NEAR, JamHacks 2024.',
+        'Rendered navigable, proximity-based chat rooms on HTML canvas.',
+        'Built an on-ledger feed of anonymous posts with user-owned data.'
+      ]
+    },
+    'spud': {
+      num: '06', kind: 'CLI · Rust', title: 'spud',
+      sub: 'A Rust CLI to download and organize music from YouTube with Spotify integration.',
+      year: '2023', role: 'Solo',
+      stack: ['Rust', 'Spotify API', 'OAuth'],
+      links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }],
+      caption: 'CLI output',
+      overview: [
+        'spud is a Rust command-line tool to download and organize music from YouTube playlists, with Spotify API integration via an OAuth flow. It has 13 GitHub stars.'
+      ],
+      highlights: [
+        'Downloads and organizes music straight from YouTube playlists.',
+        'Integrates the Spotify API through a full OAuth flow.',
+        '13 GitHub stars.'
+      ]
+    }
+  };
+
+  var order = ['parameter-golf', 'rmux', 'robotics-platform', 'match-logging', 'yapchain', 'spud'];
+
+  function slug() {
+    try { return new URLSearchParams(window.location.search).get('p') || 'parameter-golf'; }
+    catch (e) { return 'parameter-golf'; }
+  }
+
+  var s = data[slug()] ? slug() : 'parameter-golf';
+  var p = data[s];
+  var nextSlug = order[(order.indexOf(s) + 1) % order.length];
+  var np = data[nextSlug];
+
+  function set(id, txt) { document.getElementById(id).textContent = txt; }
+  set('p-num', p.num);
+  set('p-kind', p.kind);
+  set('p-title', p.title);
+  set('p-sub', p.sub);
+  set('p-caption', p.caption);
+  set('p-year', p.year);
+  set('p-role', p.role);
+  document.title = p.title + ' — Louis Berenyi';
+
+  var stackEl = document.getElementById('p-stack');
+  p.stack.forEach(function (tag) {
+    var el = document.createElement('span');
+    el.style.cssText = "font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:4px 9px;";
+    el.textContent = tag;
+    stackEl.appendChild(el);
+  });
+
+  var linksEl = document.getElementById('p-links');
+  p.links.forEach(function (lnk) {
+    var a = document.createElement('a');
+    a.href = lnk.href; a.target = '_blank'; a.rel = 'noopener'; a.className = 'ul';
+    a.style.cssText = 'color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s ease;';
+    a.textContent = lnk.label;
+    linksEl.appendChild(a);
+  });
+
+  var ovEl = document.getElementById('p-overview');
+  p.overview.forEach(function (para) {
+    var el = document.createElement('p');
+    el.style.cssText = 'margin:0 0 16px;font-size:16.5px;line-height:1.62;color:var(--fg);';
+    el.textContent = para;
+    ovEl.appendChild(el);
+  });
+
+  var hlEl = document.getElementById('p-highlights');
+  p.highlights.forEach(function (h) {
+    var row = document.createElement('div');
+    row.style.cssText = 'display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;padding:14px 0;border-bottom:1px solid var(--line);';
+    var arrow = document.createElement('span');
+    arrow.style.cssText = "font-family:'Geist Mono',monospace;font-size:12px;color:var(--accent);padding-top:3px;";
+    arrow.textContent = '→';
+    var txt = document.createElement('span');
+    txt.style.cssText = 'font-size:15.5px;line-height:1.55;color:var(--fg);';
+    txt.textContent = h;
+    row.appendChild(arrow); row.appendChild(txt);
+    hlEl.appendChild(row);
+  });
+
+  set('p-next-title', np.title);
+  document.getElementById('p-next').href = 'project.html?p=' + nextSlug;
+})();
+</script>
+</body>
+</html>
