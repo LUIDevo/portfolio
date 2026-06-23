@@ -31,11 +31,24 @@
   @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
   @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
   /* hover behaviors (replace DC style-hover) */
+  .btn{transition:all .15s ease,transform .1s ease;}
   .btn:hover{color:var(--fg)!important;border-color:var(--fg)!important;}
-  .pill:hover{border-color:var(--accent)!important;color:var(--accent)!important;background:var(--accent-soft)!important;}
+  .btn:active{transform:scale(.92);}
+  .pill{transition:all .18s ease,transform .18s ease;}
+  .pill:hover{border-color:var(--accent)!important;color:var(--accent)!important;background:var(--accent-soft)!important;transform:translateY(-2px);}
   .ul:hover{border-bottom-color:var(--accent)!important;}
   .card:hover{color:var(--accent)!important;background:var(--accent-soft)!important;transform:translateX(4px)!important;}
   .mlink:hover{color:var(--accent)!important;}
+  /* micro-interactions */
+  .arrow{display:inline-block;transition:transform .2s ease;}
+  .card:hover .arrow{transform:translate(3px,-3px);}
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto!important;}
+    .reveal{opacity:1!important;transform:none!important;transition:none!important;}
+    .pill:hover,.card:hover,.card:hover .arrow{transform:none!important;}
+  }
 </style>
 </head>
 <body>
@@ -49,7 +62,7 @@
       <button id="cmdBtn" class="btn" title="Command menu" style="height:34px;padding:0 11px;display:flex;align-items:center;gap:5px;background:transparent;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-family:'Geist Mono',monospace;font-size:12px;cursor:pointer;transition:all .15s ease;">
         <span style="font-size:13px;">⌘</span><span>K</span>
       </button>
-      <button id="themeBtn" class="btn" title="Toggle theme" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:15px;cursor:pointer;transition:all .15s ease;">☾</button>
+      <button id="themeBtn" class="btn" title="Toggle theme" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:15px;cursor:pointer;transition:all .15s ease;"><span id="themeGlyph">☾</span></button>
     </div>
   </header>
 
@@ -67,7 +80,7 @@
       </div>
     </section>
 
-    <section id="work">
+    <section id="work" class="reveal">
       <div style="display:flex;align-items:center;gap:16px;margin:74px 0 4px;">
         <span style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);">Selected Work</span>
         <span style="flex:1;height:1px;background:var(--line);"></span>
@@ -90,7 +103,7 @@
               <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;">RunPod</span>
             </div>
           </div>
-          <span style="font-family:'Geist Mono',monospace;font-size:14px;color:var(--faint);padding-top:4px;">↗</span>
+          <span class="arrow" style="font-family:'Geist Mono',monospace;font-size:14px;color:var(--faint);padding-top:4px;">↗</span>
         </a>
 
         <a href="project.html?p=rmux" class="card" style="display:grid;grid-template-columns:32px 1fr auto;gap:18px;align-items:start;padding:24px 10px;border-top:1px solid var(--line);text-decoration:none;color:var(--fg);transition:color .18s ease,background .18s ease,transform .18s ease;border-radius:8px;">
@@ -107,7 +120,7 @@
               <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;">Systems</span>
             </div>
           </div>
-          <span style="font-family:'Geist Mono',monospace;font-size:14px;color:var(--faint);padding-top:4px;">↗</span>
+          <span class="arrow" style="font-family:'Geist Mono',monospace;font-size:14px;color:var(--faint);padding-top:4px;">↗</span>
         </a>
 
         <a href="project.html?p=robotics-platform" class="card" style="display:grid;grid-template-columns:32px 1fr auto;gap:18px;align-items:start;padding:24px 10px;border-top:1px solid var(--line);text-decoration:none;color:var(--fg);transition:color .18s ease,background .18s ease,transform .18s ease;border-radius:8px;">
@@ -125,7 +138,7 @@
               <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;">Gemini</span>
             </div>
           </div>
-          <span style="font-family:'Geist Mono',monospace;font-size:14px;color:var(--faint);padding-top:4px;">↗</span>
+          <span class="arrow" style="font-family:'Geist Mono',monospace;font-size:14px;color:var(--faint);padding-top:4px;">↗</span>
         </a>
 
         <a href="project.html?p=match-logging" class="card" style="display:grid;grid-template-columns:32px 1fr auto;gap:18px;align-items:start;padding:24px 10px;border-top:1px solid var(--line);text-decoration:none;color:var(--fg);transition:color .18s ease,background .18s ease,transform .18s ease;border-radius:8px;">
@@ -142,13 +155,13 @@
               <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;">Node.js</span>
             </div>
           </div>
-          <span style="font-family:'Geist Mono',monospace;font-size:14px;color:var(--faint);padding-top:4px;">↗</span>
+          <span class="arrow" style="font-family:'Geist Mono',monospace;font-size:14px;color:var(--faint);padding-top:4px;">↗</span>
         </a>
 
       </div>
     </section>
 
-    <section>
+    <section style="animation:fadeUp .7s ease both;">
       <div style="display:flex;align-items:center;gap:16px;margin:74px 0 4px;">
         <span style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);">Also</span>
         <span style="flex:1;height:1px;background:var(--line);"></span>
@@ -159,19 +172,19 @@
             <span style="font-size:16.5px;font-weight:500;">Yapchain</span>
             <span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--muted);">Decentralized social app · Winner, Best Use of NEAR — JamHacks 2024</span>
           </div>
-          <span style="font-family:'Geist Mono',monospace;font-size:13px;color:var(--faint);">↗</span>
+          <span class="arrow" style="font-family:'Geist Mono',monospace;font-size:13px;color:var(--faint);">↗</span>
         </a>
         <a href="project.html?p=spud" class="card" style="display:grid;grid-template-columns:1fr auto;gap:18px;align-items:baseline;padding:18px 10px;border-top:1px solid var(--line);text-decoration:none;color:var(--fg);transition:color .18s ease,background .18s ease,transform .18s ease;border-radius:8px;">
           <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
             <span style="font-size:16.5px;font-weight:500;">spud</span>
             <span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--muted);">Rust CLI for YouTube → Spotify music, OAuth · 13 ★</span>
           </div>
-          <span style="font-family:'Geist Mono',monospace;font-size:13px;color:var(--faint);">↗</span>
+          <span class="arrow" style="font-family:'Geist Mono',monospace;font-size:13px;color:var(--faint);">↗</span>
         </a>
       </div>
     </section>
 
-    <section id="experience">
+    <section id="experience" class="reveal">
       <div style="display:flex;align-items:center;gap:16px;margin:74px 0 4px;">
         <span style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);">Experience</span>
         <span style="flex:1;height:1px;background:var(--line);"></span>
@@ -198,7 +211,7 @@
       </div>
     </section>
 
-    <section id="stack">
+    <section id="stack" class="reveal">
       <div style="display:flex;align-items:center;gap:16px;margin:74px 0 4px;">
         <span style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);">Stack</span>
         <span style="flex:1;height:1px;background:var(--line);"></span>
@@ -223,7 +236,7 @@
       </div>
     </section>
 
-    <section id="contact" style="margin-top:100px;">
+    <section id="contact" class="reveal" style="margin-top:100px;">
       <div style="display:flex;align-items:center;gap:16px;margin-bottom:22px;">
         <span style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);">Contact</span>
         <span style="flex:1;height:1px;background:var(--line);"></span>
@@ -265,12 +278,13 @@
   applyTheme(theme);
   function glyph() { return theme === 'dark' ? '☀' : '☾'; }
   var themeBtn = document.getElementById('themeBtn');
-  themeBtn.textContent = glyph();
+  var themeGlyph = document.getElementById('themeGlyph');
+  themeGlyph.textContent = glyph();
   function toggleTheme() {
     theme = theme === 'dark' ? 'light' : 'dark';
     try { localStorage.setItem('lb-theme', theme); } catch (e) {}
     applyTheme(theme);
-    themeBtn.textContent = glyph();
+    themeGlyph.textContent = glyph();
   }
   themeBtn.addEventListener('click', toggleTheme);
 
@@ -366,6 +380,19 @@
       closeCmd();
     }
   });
+
+  // --- scroll reveal ---
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('in'); });
+  }
 })();
 </script>
 </body>
