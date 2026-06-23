@@ -147,18 +147,18 @@
     'parameter-golf': {
       num: '01', kind: 'ML / Optimization', title: 'Parameter Golf',
       sub: 'Quantizing a language model into a hard 16 MB memory budget under a time limit.',
-      year: '2025', role: 'Solo',
+      year: '2025', role: 'Duo',
       stack: ['Python', 'NumPy', 'QAT', 'int6', 'RunPod', 'SSH'],
       links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo/parameter-golf' }],
       caption: 'training-run dashboard',
       image: 'images/parameter-golf.png',
       overview: [
-        'Parameter Golf was a constrained-optimization challenge: take a provided GPT-style transformer language model and compress it to fit inside a hard 16 MB budget — without watching quality collapse.',
-        'I approached it with quantization-aware training and a staged int8 → int6 weight quantization, dropping roughly 25% of the bits per weight while keeping the model coherent.'
+				'Parameter Golf was a machine learning challenge about optimization. The goal was to take a base GPT transformer model and minimise its score as much as possible, while fitting the entire model within a 16 MB budget.',
+        'Me and my groupmate Albless (link) approached it with quantization-aware training (QAT) and increasing the int8 → int6 weight quantization with bit transformations TODO: and changing model parameters to stabilise the loss from the increased quantization.'
       ],
       highlights: [
         'Quantization-aware training (QAT) with int8 → int6 weights — 25% fewer bits per weight inside a hard 16 MB budget.',
-        'Added stochastic weight averaging and weight EMA for training stability across runs.',
+        'Added stochastic weight averaging and weighted EMA for training stability.',
         'Ran experiments on rented cloud GPUs (RunPod over SSH) with a custom logging system to track and compare runs across the train/eval loop.'
       ]
     },
@@ -170,8 +170,9 @@
       links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }],
       caption: 'terminal panes',
       overview: [
-        'rmux is a terminal multiplexer with around 1.9k GitHub stars. I diagnosed and fixed a configuration bug where the pane-base-index option was silently ignored — panes stayed 0-indexed regardless of the user’s config.',
+        'rmux is a rust-based terminal multiplexer with around 1.9k GitHub stars. I implemented an integration with tmux plugins, allowing users to run plugins like tmux-sensible within rmux by creating a shim.I also fixed a configuration bug where rmux panes stayed 0-indexed regardless of the user’s config.',
         'The root cause spanned three subsystems, so the fix had to be consistent everywhere a pane index is surfaced.'
+			// TODO: HERE
       ],
       highlights: [
         'Traced a silent pane-base-index bug across three subsystems: display-panes, list-panes, and #P status-line formatting.',
@@ -216,9 +217,10 @@
     'yapchain': {
       num: '05', kind: 'Web3 · Hackathon', title: 'Yapchain',
       sub: 'A decentralized, proximity-based social app where users own their data.',
+      image: 'images/yapchain.png',
       year: '2024', role: 'Team',
-      stack: ['React', 'Next.js', 'Express', 'NEAR'],
-      links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }],
+      stack: ['React', 'Next.js', 'Node', 'Express', 'NEAR', 'Blockchain'],
+      links: [{ label: 'DoraHacks ↗', href: 'https://dorahacks.io/buidl/13388' }],
       caption: 'canvas chat rooms',
       overview: [
         'Yapchain is a decentralized, proximity-based social app built on the NEAR blockchain, where users own their own data. It won Best Use of NEAR at JamHacks 2024.',
