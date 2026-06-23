@@ -74,7 +74,7 @@
 
     <div id="p-links" style="margin-top:28px;display:flex;flex-wrap:wrap;gap:10px 22px;font-family:'Geist Mono',monospace;font-size:13px;"></div>
 
-    <div style="margin-top:40px;aspect-ratio:16/9;border:1px solid var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;background-color:var(--card2);background-image:repeating-linear-gradient(135deg,transparent 0,transparent 9px,var(--line) 9px,var(--line) 10px);overflow:hidden;">
+    <div id="p-media" style="margin-top:40px;aspect-ratio:16/9;border:1px solid var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;background-color:var(--card2);background-image:repeating-linear-gradient(135deg,transparent 0,transparent 9px,var(--line) 9px,var(--line) 10px);overflow:hidden;">
       <span id="p-caption" style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);background:var(--bg);padding:6px 12px;border-radius:6px;border:1px solid var(--line);"></span>
     </div>
 
@@ -149,8 +149,9 @@
       sub: 'Quantizing a language model into a hard 16 MB memory budget under a time limit.',
       year: '2025', role: 'Solo',
       stack: ['Python', 'NumPy', 'QAT', 'int6', 'RunPod', 'SSH'],
-      links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }],
+      links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo/parameter-golf' }],
       caption: 'training-run dashboard',
+      image: 'images/parameter-golf.png',
       overview: [
         'Parameter Golf was a constrained-optimization challenge: take a provided GPT-style transformer language model and compress it to fit inside a hard 16 MB budget — without watching quality collapse.',
         'I approached it with quantization-aware training and a staged int8 → int6 weight quantization, dropping roughly 25% of the bits per weight while keeping the model coherent.'
@@ -268,6 +269,18 @@
   set('p-year', p.year);
   set('p-role', p.role);
   document.title = p.title + ' — Louis Berenyi';
+
+  if (p.image) {
+    var media = document.getElementById('p-media');
+    media.innerHTML = '';
+    media.style.backgroundImage = 'none';
+    var img = document.createElement('img');
+    img.src = p.image;
+    img.alt = p.title;
+    img.loading = 'lazy';
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+    media.appendChild(img);
+  }
 
   var stackEl = document.getElementById('p-stack');
   p.stack.forEach(function (tag, i) {
