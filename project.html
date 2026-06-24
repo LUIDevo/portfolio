@@ -148,13 +148,14 @@
       num: '01', kind: 'ML / Optimization', title: 'Parameter Golf',
       sub: 'Quantizing a language model into a hard 16 MB memory budget under a time limit.',
       year: '2025', role: 'Duo',
-      stack: ['Python', 'NumPy', 'QAT', 'int6', 'RunPod', 'SSH'],
+      stack: ['Python', 'PyTorch', 'NumPy', 'QAT', 'int6', 'RunPod', 'SSH'],
       links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo/parameter-golf' }],
+      mate: { name: 'Albless', href: 'TODO_FRIEND_URL' },
       caption: 'training-run dashboard',
-      image: 'images/parameter-golf.png',
+      image: { webp: 'images/parameter-golf.webp', fallback: 'images/parameter-golf.jpg' },
       overview: [
-				'Parameter Golf was a machine learning challenge about optimization. The goal was to take a base GPT transformer model and minimise its score as much as possible, while fitting the entire model within a 16 MB budget.',
-        'Me and my groupmate Albless (link) approached it with quantization-aware training (QAT) and increasing the int8 → int6 weight quantization with bit transformations TODO: and changing model parameters to stabilise the loss from the increased quantization.'
+        'Parameter Golf was a machine learning challenge about optimization. The goal was to take a base GPT transformer model and minimise its score as much as possible, while fitting the entire model within a 16 MB budget.',
+        'My groupmate Albless and I approached it with quantization-aware training (QAT), pushing weight quantization from int8 down to int6 — bit-packing the sub-byte weights with bitwise shifts and grouping — and tuning model parameters to stabilise the loss from the heavier quantization.'
       ],
       highlights: [
         'Quantization-aware training (QAT) with int8 → int6 weights — 25% fewer bits per weight inside a hard 16 MB budget.',
@@ -164,17 +165,18 @@
     },
     'rmux': {
       num: '02', kind: 'Open Source · Rust', title: 'rmux',
-      sub: 'A pane-indexing fix across three subsystems of a 1.9k-star terminal multiplexer.',
+      sub: 'A tmux-plugin integration and a pane-indexing fix for a 2k-star terminal multiplexer.',
       year: '2024', role: 'Contributor',
       stack: ['Rust', 'Systems', 'Open Source'],
       links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }],
       caption: 'terminal panes',
       overview: [
-        'rmux is a rust-based terminal multiplexer with around 1.9k GitHub stars. I implemented an integration with tmux plugins, allowing users to run plugins like tmux-sensible within rmux by creating a shim.I also fixed a configuration bug where rmux panes stayed 0-indexed regardless of the user’s config.',
-        'The root cause spanned three subsystems, so the fix had to be consistent everywhere a pane index is surfaced.'
-			// TODO: HERE
+        'rmux is a Rust-based terminal multiplexer with around 2k GitHub stars.',
+        'I built an integration that lets rmux run tmux plugins — users can load plugins like tmux-sensible inside rmux through a compatibility shim. TODO: expand — how the shim works, what it intercepts, and which plugins it unlocks.',
+        'I also fixed a configuration bug where rmux panes stayed 0-indexed regardless of the user’s config. The root cause spanned three subsystems, so the fix had to be consistent everywhere a pane index is surfaced.'
       ],
       highlights: [
+        'Built a tmux-plugin compatibility shim so existing plugins (e.g. tmux-sensible) run unmodified inside rmux. TODO: add detail / impact.',
         'Traced a silent pane-base-index bug across three subsystems: display-panes, list-panes, and #P status-line formatting.',
         'Implemented a shared helper applying the configured offset consistently across every affected path.',
         'Added regression tests covering pane labels and ListPanes output.'
@@ -276,12 +278,26 @@
     var media = document.getElementById('p-media');
     media.innerHTML = '';
     media.style.backgroundImage = 'none';
+    var webp = (typeof p.image === 'object') ? p.image.webp : null;
+    var fallback = (typeof p.image === 'object') ? p.image.fallback : p.image;
+    var holder = media;
+    if (webp) {
+      var pic = document.createElement('picture');
+      pic.style.cssText = 'display:block;width:100%;height:100%;';
+      var src = document.createElement('source');
+      src.type = 'image/webp';
+      src.srcset = webp;
+      pic.appendChild(src);
+      media.appendChild(pic);
+      holder = pic;
+    }
     var img = document.createElement('img');
-    img.src = p.image;
+    img.src = fallback;
     img.alt = p.title;
     img.loading = 'lazy';
+    img.decoding = 'async';
     img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
-    media.appendChild(img);
+    holder.appendChild(img);
   }
 
   var stackEl = document.getElementById('p-stack');
@@ -302,11 +318,24 @@
     linksEl.appendChild(a);
   });
 
+  function fillText(parent, text) {
+    // inline-link the groupmate's name if p.mate is set
+    var name = p.mate && p.mate.name, idx = name ? text.indexOf(name) : -1;
+    if (idx === -1) { parent.textContent = text; return; }
+    parent.appendChild(document.createTextNode(text.slice(0, idx)));
+    var a = document.createElement('a');
+    a.href = p.mate.href; a.target = '_blank'; a.rel = 'noopener'; a.className = 'ul';
+    a.style.cssText = 'color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s ease;';
+    a.textContent = name;
+    parent.appendChild(a);
+    parent.appendChild(document.createTextNode(text.slice(idx + name.length)));
+  }
+
   var ovEl = document.getElementById('p-overview');
   p.overview.forEach(function (para) {
     var el = document.createElement('p');
     el.style.cssText = 'margin:0 0 16px;font-size:16.5px;line-height:1.62;color:var(--fg);';
-    el.textContent = para;
+    fillText(el, para);
     ovEl.appendChild(el);
   });
 
