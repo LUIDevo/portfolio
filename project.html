@@ -154,11 +154,11 @@
       caption: 'training-run dashboard',
       image: { webp: 'images/parameter-golf.webp', fallback: 'images/parameter-golf.jpg' },
       overview: [
-        'Parameter Golf was a machine learning challenge about optimization. The goal was to take a base GPT transformer model and minimise its score as much as possible, while fitting the entire model within a 16 MB budget.',
-        'My groupmate Albless and I approached it with quantization-aware training (QAT), pushing weight quantization from int8 down to int6 via bitwise shifts and grouping, and tuning model parameters to stabilise the loss from the heavier quantization.'
+        'Parameter Golf was a machine-learning optimization challenge: take a base GPT transformer and minimize its score as much as possible while fitting the whole model inside a hard 16 MB budget.',
+        'Albless and I approached it with quantization-aware training (QAT), pushing weight quantization from int8 down to int6 via bitwise shifts and grouping, then tuning model parameters to stabilize the loss from the heavier quantization.'
       ],
       highlights: [
-        'Quantization-aware training (QAT) with int8 → int6 weights, resulting in 25% fewer bits per weight inside a 16 MB budget.',
+        'Applied quantization-aware training (QAT) with int8 → int6 weights — 25% fewer bits per weight inside a 16 MB budget.',
         'Added stochastic weight averaging (SWA) and weighted EMA for training stability.',
         'Ran experiments on rented cloud GPUs (RunPod over SSH) with a custom logging system to track and compare runs across the train/eval loop.'
       ]
@@ -172,8 +172,9 @@
       caption: 'terminal panes',
       overview: [
         'rmux is a Rust-based terminal multiplexer with around 2.1k GitHub stars.',
-        'I built an integration that lets rmux run tmux plugins. Users can load plugins like tmux-sensible inside rmux through a compatibility shim. Since .tmux files are essentially bash scripts that trigger \"tmux\" commands, I created a shim that intercepts the tmux calls using a PATH override, turning it into a rmux command. I also considered other ways to implement tmux plugins such as reading through the script and swapping every \'tmux\' with \'rmux\' but I found my implementation was cleaner and was less prone to breakages. With this translation layer, rmux is now able to take in .tmux files natively.',
-        'I also fixed a configuration bug where rmux panes stayed 0-indexed regardless of the user’s config. The root cause spanned three subsystems, so the fix had to be consistent everywhere a pane index is surfaced.'
+        'I built a compatibility layer that lets rmux run tmux plugins like tmux-sensible. Because .tmux files are just bash scripts that call the "tmux" command, I added a shim that intercepts those calls via a PATH override and translates them into rmux commands.',
+        'I weighed simpler approaches such as rewriting every "tmux" in the script to "rmux" — but the shim was cleaner and less prone to breakage. With this translation layer, rmux can now run .tmux files natively.',
+        'I also fixed a configuration bug where panes stayed 0-indexed regardless of the user\'s config. The root cause spanned three subsystems, so the fix had to be consistent everywhere a pane index is surfaced.'
       ],
       highlights: [
         'Built a tmux-plugin compatibility shim so existing plugins (e.g. tmux-sensible) run unmodified inside rmux.',
@@ -190,8 +191,8 @@
       links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }],
       caption: 'strategy dashboard',
       overview: [
-        'A full-stack analytics platform (React + GraphQL/Apollo + Prisma) that converts raw scouting data into AI-generated match strategy, replacing manual spreadsheet workflows for a 30–40 person robotics team.',
-        'It is backed by an offline-first local database that mirrors stats from a third-party competition API, so analysis keeps working at venues with flaky networks.'
+        'A full-stack analytics platform (React + GraphQL/Apollo + Prisma) that turns raw scouting data into AI-generated match strategy, replacing manual spreadsheet workflows for a 30–40 person robotics team.',
+        'I backed it with an offline-first local database that mirrors stats from a third-party competition API, so analysis keeps working at venues with flaky networks.'
       ],
       highlights: [
         'Built an LLM strategy engine that assembles structured prompts from team stats and game rules, calling the Gemini API for styled HTML breakdowns of any two alliances.',
@@ -207,12 +208,12 @@
       links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }],
       caption: 'logging interface',
       overview: [
-        'A framework-free, zero-dependency client built in vanilla HTML/CSS/JS. The app has no build step and no runtime deps, so it runs in any browser on any device and works fully offline. This was a hard requirement, because some competition venues lacked network connection.',
-        'A companion TypeScript/Node service was created to log reports to a central database once users connected to internet.'
+        'A framework-free client built in vanilla HTML/CSS/JS, with no build step and no runtime dependencies — so it runs in any browser on any device and works fully offline. Offline support was a hard requirement, since some competition venues had no network.',
+        'I paired it with a TypeScript/Node service that synced reports to a secured central database once a connection returned.'
       ],
       highlights: [
         'Captured 1,300+ match logs in live competition across a team of 30–40 people.',
-        'Works without any runtime dependencies. It just opens and runs.',
+        'Shipped with zero runtime dependencies.',
         'Queued and synced submissions to the Node service automatically once a connection came back.'
       ]
     },
@@ -225,11 +226,11 @@
       links: [{ label: 'DoraHacks ↗', href: 'https://dorahacks.io/buidl/13388' }],
       caption: 'canvas chat rooms',
       overview: [
-        'Yapchain is a decentralized, proximity-based social app built on the NEAR blockchain, where users own their own data. It won Best Use of NEAR at JamHacks 2024.',
-        'Chat rooms are navigable and rendered on an HTML canvas, with an on-ledger feed of anonymous posts.'
+        'Yapchain is a decentralized, proximity-based social app built on the NEAR blockchain, where users own their own data. It won Best Use of NEAR Protocol at JamHacks 2024.',
+        'Chat rooms are navigable and rendered on an HTML canvas, with an on-ledger feed of anonymous posts secured through the blockchain.'
       ],
       highlights: [
-        'Winner — Best Use of NEAR, JamHacks 2024.',
+        'JamHacks 2024 Winner — Best Use of NEAR Protocol.',
         'Rendered navigable, proximity-based chat rooms on HTML canvas.',
         'Built an on-ledger feed of anonymous posts with user-owned data.'
       ]
@@ -239,7 +240,7 @@
       sub: 'A Rust CLI to download and organize music from YouTube with Spotify integration.',
       year: '2023', role: 'Solo',
       stack: ['Rust', 'Spotify API', 'OAuth'],
-      links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }],
+      links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo/spud' }],
       caption: 'CLI output',
       overview: [
         'spud is a Rust command-line tool to download and organize music from YouTube playlists, with Spotify API integration via an OAuth flow. It has 13 GitHub stars.'
