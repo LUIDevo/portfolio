@@ -153,6 +153,7 @@
       mate: { name: 'Albless', href: '' },
       caption: 'training-run dashboard',
       image: { webp: 'images/parameter-golf.webp', fallback: 'images/parameter-golf.jpg' },
+      imagePos: 'top',
       overview: [
         'Parameter Golf was a machine-learning optimization challenge: take a base GPT transformer and minimize its score as much as possible while fitting the whole model inside a hard 16 MB budget.',
         'Albless and I approached it with quantization-aware training (QAT), pushing weight quantization from int8 down to int6 via bitwise shifts and grouping, then tuning model parameters to stabilize the loss from the heavier quantization.'
@@ -170,6 +171,8 @@
       stack: ['Rust', 'Systems', 'Open Source'],
 			links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }, { label: 'Merged PR', href: 'https://github.com/Helvesec/rmux/pull/24#issuecomment-4729173377'}],
       caption: 'terminal panes',
+      image: { webp: 'images/rmux.webp', fallback: 'images/rmux.jpg' },
+      imagePos: 'top',
       overview: [
         'rmux is a Rust-based terminal multiplexer with around 2.1k GitHub stars.',
         'I built a compatibility layer that lets rmux run tmux plugins like tmux-sensible. Because .tmux files are just bash scripts that call the "tmux" command, I added a shim that intercepts those calls via a PATH override and translates them into rmux commands.',
@@ -190,6 +193,8 @@
       stack: ['React', 'GraphQL', 'Apollo', 'Prisma', 'SQLite', 'Gemini API'],
       links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }],
       caption: 'strategy dashboard',
+      image: { webp: 'images/frc-graphql-app.webp', fallback: 'images/frc-graphql-app.jpg' },
+      imagePos: 'top',
       overview: [
         'A full-stack analytics platform (React + GraphQL/Apollo + Prisma) that turns raw scouting data into AI-generated match strategy, replacing manual spreadsheet workflows for a 30–40 person robotics team.',
         'I backed it with an offline-first local database that mirrors stats from a third-party competition API, so analysis keeps working at venues with flaky networks.'
@@ -207,6 +212,8 @@
       stack: ['Vanilla JS', 'HTML/CSS', 'TypeScript', 'Node.js'],
       links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }],
       caption: 'logging interface',
+      image: { webp: 'images/offline-logging-app.webp', fallback: 'images/offline-logging-app.jpg' },
+      imagePos: 'top',
       overview: [
         'A framework-free client built in vanilla HTML/CSS/JS, with no build step and no runtime dependencies — so it runs in any browser on any device and works fully offline. Offline support was a hard requirement, since some competition venues had no network.',
         'I paired it with a TypeScript/Node service that synced reports to a secured central database once a connection returned.'
@@ -220,7 +227,8 @@
     'yapchain': {
       num: '05', kind: 'Web3 · Hackathon', title: 'Yapchain',
       sub: 'A decentralized, proximity-based social app where users own their data.',
-      image: 'images/yapchain.png',
+      image: { webp: 'images/yapchain.webp', fallback: 'images/yapchain.jpg' },
+      imagePos: 'top',
       year: '2024', role: 'Team',
       stack: ['React', 'Next.js', 'Node', 'Express', 'NEAR', 'Blockchain'],
       links: [{ label: 'DoraHacks ↗', href: 'https://dorahacks.io/buidl/13388' }],
@@ -237,18 +245,22 @@
     },
     'spud': {
       num: '06', kind: 'CLI · Rust', title: 'spud',
-      sub: 'A Rust CLI to download and organize music from YouTube with Spotify integration.',
+      sub: 'A Rust CLI that downloads and organizes music from YouTube, with Spotify integration.',
       year: '2023', role: 'Solo',
       stack: ['Rust', 'Spotify API', 'OAuth'],
       links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo/spud' }],
       caption: 'CLI output',
+      image: 'images/spud.gif',
+      imagePos: 'left top',
+      imageHug: true,
       overview: [
-        'spud is a Rust command-line tool to download and organize music from YouTube playlists, with Spotify API integration via an OAuth flow. It has 13 GitHub stars.'
+        'spud is a Rust command-line tool that downloads and organizes music from YouTube playlists, with Spotify API integration via an OAuth flow.',
+        'I built it as a simpler, more stable alternative to SpotDL, which had grown error-prone by 2026 due to Spotify API changes.' 
       ],
       highlights: [
+        'Built as a leaner, more reliable alternative to SpotDL.',
         'Downloads and organizes music straight from YouTube playlists.',
-        'Integrates the Spotify API through a full OAuth flow.',
-        '13 GitHub stars.'
+        'Integrates the Spotify API through a full OAuth flow.'
       ]
     }
   };
@@ -279,6 +291,12 @@
     var media = document.getElementById('p-media');
     media.innerHTML = '';
     media.style.backgroundImage = 'none';
+    if (p.imageHug) {
+      media.style.aspectRatio = 'unset';
+      media.style.height = 'auto';
+      media.style.alignItems = 'flex-start';
+      media.style.justifyContent = 'flex-start';
+    }
     var webp = (typeof p.image === 'object') ? p.image.webp : null;
     var fallback = (typeof p.image === 'object') ? p.image.fallback : p.image;
     var holder = media;
@@ -297,7 +315,11 @@
     img.alt = p.title;
     img.loading = 'lazy';
     img.decoding = 'async';
-    img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+    if (p.imageHug) {
+      img.style.cssText = 'width:100%;height:auto;display:block;';
+    } else {
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;object-position:' + (p.imagePos || 'center') + ';';
+    }
     holder.appendChild(img);
   }
 
