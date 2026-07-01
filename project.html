@@ -166,7 +166,7 @@
     },
     'rmux': {
       num: '02', kind: 'Open Source · Rust', title: 'rmux',
-      sub: 'A tmux-plugin integration and a pane-indexing fix for a 2.1k-star terminal multiplexer.',
+      sub: 'A tmux-plugin integration and a pane-indexing fix for a 2.2k-star terminal multiplexer.',
       year: '2026', role: 'Contributor',
       stack: ['Rust', 'Systems', 'Open Source'],
 			links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }, { label: 'Merged PR', href: 'https://github.com/Helvesec/rmux/pull/24#issuecomment-4729173377'}],
@@ -174,7 +174,7 @@
       image: { webp: 'images/rmux.webp', fallback: 'images/rmux.jpg' },
       imagePos: 'top',
       overview: [
-        'rmux is a Rust-based terminal multiplexer with around 2.1k GitHub stars.',
+        'rmux is a Rust-based terminal multiplexer with around 2.2k GitHub stars.',
         'I built a compatibility layer that lets rmux run tmux plugins like tmux-sensible. Because .tmux files are just bash scripts that call the "tmux" command, I added a shim that intercepts those calls via a PATH override and translates them into rmux commands.',
         'I weighed simpler approaches such as rewriting every "tmux" in the script to "rmux" — but the shim was cleaner and less prone to breakage. With this translation layer, rmux can now run .tmux files natively.',
         'I also fixed a configuration bug where panes stayed 0-indexed regardless of the user\'s config. The root cause spanned three subsystems, so the fix had to be consistent everywhere a pane index is surfaced.'
