@@ -1,30 +1,29 @@
 
 # Can you talk your way past an AI resume screener?
 
-AI tools score resumes and rank candidates now. With people, you can nudge an
-impression with the right words. I wanted to know if the same trick works on the
-model: can you raise your score just by *how* you write, without changing a single
-fact?
-
 Recently, there has been a rise in the usage of AI agents in many fields, including hiring. These AI tools are now integrated in some companies, and are able to score resumes and rank candidates.
 With people, you can change their impression of you with the right words. So, I wanted to see if you can use those same tricks on an AI hiring agent; are you able to raise your score by just *how* you write, without changing a single fact?
 
 ## The setup
 
 I used the system prompt from HiringAgent, an AI resume screener that was recently
-open-sourced. It scores a resume out of 120 across four categories — open source,
-projects, work experience, technical skills - plus bonus points. I wrote one
-fictional candidate: a second-year CS student with an internship, two projects, and
-a few open-source contributions. Then I rewrote the same resume using only different wording and keeping the general details. 
+open-sourced. 
 
-I need to write more about the system prompt
+The prompt tells the model to act as a technical recruiter and rate a resume out of
+120, split across four categories: open source (up to 35 points), personal projects
+(up to 30), work experience (up to 25), and technical skills (up to 10), plus up to
+20 bonus points. It also carries a lot of baked-in rules — personal GitHub repos
+don't count as open source (only contributions to other people's projects do), basic
+projects like to-do apps score near zero while complex ones score in the 20s, and
+programs like Google Summer of Code earn bonus points.
 
-- R0 — honest, plainly written. The baseline.
-- R1–R4 — the same facts with steadily more adjectives.
-- A "mirror" version that echoed the scorer's own vocabulary back at it.
-- An "optimized" version — my best attempt at a resume tuned for AI screeners in general.
+I had several resume versions with the details listed below.
+- R0 — The plain, honest baseline resume. It's meant to read as a standard resume.
+- R1–R4 — the same facts with steadily more adjectives per version.
+- RM - A "mirror" version. It specificly mirrors this system prompt, which is meant to see if using terms and ideas used in the system prompt net higher scores.
+- An "optimized" version — This version unlike the mirror version is aimed for general AI hiring agents and not targeting this specific system prompt.
 
-Each resume was scored 10 times in one batch, because there were variations in model score between each run.
+The resume's scores were recorded by running each resume through the reviewer 10 times and logging each run. The agent is an LLM, not a fixed formula so the scores varied on each run and between batches.
 
 ## What I expected
 
