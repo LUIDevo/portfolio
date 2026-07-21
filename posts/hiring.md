@@ -17,6 +17,8 @@ projects, work experience, technical skills - plus bonus points. I wrote one
 fictional candidate: a second-year CS student with an internship, two projects, and
 a few open-source contributions. Then I rewrote the same resume using only different wording and keeping the general details. 
 
+I need to write more about the system prompt
+
 - R0 — honest, plainly written. The baseline.
 - R1–R4 — the same facts with steadily more adjectives.
 - A "mirror" version that echoed the scorer's own vocabulary back at it.
@@ -37,33 +39,12 @@ When I scored the *identical* baseline twice, the two batches came back at 77.1 
 
 I first thought that the tool was unreliable. But after looking closer at the categorical scores, I saw that most categories only moves by a single point every run. Every category was reasonably similar between runs, which means that the system prompt was doing its job. The prompt could still differentiate a weak candidate from a strong one.
 
-The problem isn't reliability, it's resolution. The gap between a good and a bad
-candidate is 15–20 points in a category. The gap I was creating by rewording — 1 to
-5 points on the total — is the same size as the tool's jitter. So I can't show that
-wording moved the score. Not because wording does nothing, but because any effect it
-has is the same size as the coin-flip underneath it.
+By looking into the system prompt, it's easy to see why this occurs. The prompt defines a "low score" by the range 1-9, while it classifies a "high score" by 20-30. So it's not unreasonable for the model to have varying ranges between run to run, because the prompt doesn't clearly definte the difference between a 3 and an 8, both are classified as weak. This also made it clear for my experiment. If I were to accurately see if I could change the models score, then I would have to measure it hundreds if not 1000s of times. And judging from my results, the scores would barely pass the baseline in any meaningful way considering one more "strong project" is 20-30 points. 
 
-The jitter also wasn't spread evenly. The fuzziest judgments — bonus points and
-open-source credit — swung the most, while concrete things like the skills list
-barely moved. And my "optimized" resume, for what it's worth, didn't beat the
-baseline at all; reordering and rewording actually *lowered* its open-source score.
+The variation wasn't even either. The noisest judgements were bonus points and open-source credit, while the skills list hardly budged. 
+
+Suprisingly, my "optimized" resume didn't beat the baseline at all.
 
 ## So can you game it?
 
-Not really — not by rephrasing a fixed set of facts. The lever people assume exists
-("use stronger language") turns out to be smaller than the machine's own run-to-run
-randomness. If you want a higher score, the boring route wins by default: have
-better facts.
-
-Where I'd actually be cautious is the opposite direction. A real screening scores
-each resume once, not ten times, and the fuzziest categories are the jumpiest — so a
-borderline candidate's outcome can partly ride on which roll their single run lands
-on. The tool is steady enough to rank people who are clearly different. It's the
-close calls where the noise gets a vote.
-
-## Caveats
-
-One fictional candidate, one screener, ten runs each. The wording effects I saw are
-suggestive, not established — which is sort of the point. If a wording trick can't
-clear the tool's own noise floor in a controlled test, it isn't a trick you can
-count on.
+My experiment was far from conclusive due to the small sample size. But from what I could gather, changing the words and adding adjectives doesn't meaningfully change the resume score. My largest results on average upped the score by 3 points, while one strong project could net you an extra 20 or 30 points. However, sometimes even the smallest factor can make a big difference. In comparison to other factors 3 points doesn't make much difference, but side by side to another candidate, 3 points can make all the difference.
