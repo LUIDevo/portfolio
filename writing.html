@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Writing — Louis Berenyi</title>
+<meta name="description" content="Notes on systems software, machine-learning experiments, and open-source work by Louis Berenyi.">
+<script>try{var t=localStorage.getItem('lb-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  :root{
+    --bg:#f7f6f3; --fg:#191917; --muted:#54534d; --faint:#73716a;
+    --line:rgba(20,20,18,0.14); --card:#ffffff; --card2:#eceae4;
+    --accent:#2b5fd9; --accent-soft:rgba(43,95,217,0.08);
+  }
+  [data-theme="dark"]{
+    --bg:#0c0c0e; --fg:#ededee; --muted:#8c8c92; --faint:#56565c;
+    --line:rgba(255,255,255,0.12); --card:#161619; --card2:#1c1c20;
+    --accent:#7099ff; --accent-soft:rgba(112,153,255,0.13);
+  }
+  body{background:var(--bg);}
+  ::selection{background:var(--accent);color:#fff;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+  .btn{transition:all .15s ease,transform .1s ease;}
+  .btn:hover{color:var(--fg)!important;border-color:var(--fg)!important;}
+  .btn:active{transform:scale(.92);}
+  .flink{transition:color .15s ease;}
+  .flink:hover{color:var(--fg)!important;}
+  .card:hover{color:var(--accent)!important;background:var(--accent-soft)!important;transform:translateX(4px)!important;}
+  .arrow{display:inline-block;transition:transform .2s ease;}
+  .card:hover .arrow{transform:translate(3px,-3px);}
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto!important;}
+    .card:hover,.card:hover .arrow{transform:none!important;}
+  }
+</style>
+</head>
+<body>
+<div style="min-height:100vh;background:var(--bg);color:var(--fg);font-family:'Geist','Helvetica Neue',Arial,sans-serif;transition:background .45s ease,color .45s ease;-webkit-font-smoothing:antialiased;">
+
+  <header style="max-width:720px;margin:0 auto;padding:28px 24px 12px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" class="flink" style="font-family:'Geist Mono',monospace;font-size:12.5px;letter-spacing:0.06em;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:9px;">
+      <span style="font-size:14px;">←</span> Index
+    </a>
+    <button id="themeBtn" class="btn" title="Toggle theme" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:15px;cursor:pointer;"><span id="themeGlyph">☾</span></button>
+  </header>
+
+  <main style="max-width:720px;margin:0 auto;padding:0 24px 40px;animation:fadeUp .6s ease both;">
+
+    <section style="padding:44px 0 8px;">
+      <h1 style="margin:0;font-size:clamp(34px,5.5vw,52px);font-weight:500;letter-spacing:-0.025em;line-height:1.04;">Writing</h1>
+      <p style="margin:14px 0 0;font-size:18px;line-height:1.5;color:var(--muted);max-width:560px;">Notes on systems software, machine-learning experiments, and open-source work. Occasional, and only when there&rsquo;s something worth writing down.</p>
+    </section>
+
+    <section>
+      <div style="display:flex;align-items:center;gap:16px;margin:40px 0 4px;">
+        <span style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);">Posts</span>
+        <span style="flex:1;height:1px;background:var(--line);"></span>
+        <span style="font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--faint);">01</span>
+      </div>
+      <div style="border-bottom:1px solid var(--line);">
+
+        <a href="posts/fitting-a-transformer-into-16mb.html" class="card" style="display:grid;grid-template-columns:1fr auto;gap:18px;align-items:start;padding:24px 10px;border-top:1px solid var(--line);text-decoration:none;color:var(--fg);transition:color .18s ease,background .18s ease,transform .18s ease;border-radius:8px;">
+          <div>
+            <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+              <span style="font-size:21px;font-weight:500;letter-spacing:-0.01em;">Fitting a transformer into 16 megabytes</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);">Jul 2026 · 6 min</span>
+            </div>
+            <p style="margin:7px 0 0;font-size:14.5px;line-height:1.55;color:var(--muted);max-width:520px;">What breaks when you push weight quantization from int8 down to int6, and what it took to stabilize training afterward.</p>
+          </div>
+          <span class="arrow" style="font-family:'Geist Mono',monospace;font-size:14px;color:var(--faint);padding-top:4px;">↗</span>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer style="max-width:720px;margin:0 auto;padding:40px 24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--faint);">
+    <a href="index.html" class="flink" style="color:var(--faint);text-decoration:none;">← Back to index</a>
+    <span>© 2026 Louis Berenyi</span>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  function stored() { try { return localStorage.getItem('lb-theme'); } catch (e) { return null; } }
+  var theme = stored() || 'light';
+  root.setAttribute('data-theme', theme);
+  var themeGlyph = document.getElementById('themeGlyph');
+  themeGlyph.textContent = theme === 'dark' ? '☀' : '☾';
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('lb-theme', theme); } catch (e) {}
+    root.setAttribute('data-theme', theme);
+    themeGlyph.textContent = theme === 'dark' ? '☀' : '☾';
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') window.location.href = 'index.html';
+  });
+})();
+</script>
+</body>
+</html>

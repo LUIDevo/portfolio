@@ -30,6 +30,7 @@
   ::selection{background:var(--accent);color:#fff;}
   @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
   @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+  @keyframes spinIn{from{opacity:0;transform:rotate(-75deg);}to{opacity:1;transform:none;}}
   /* hover behaviors (replace DC style-hover) */
   .btn{transition:all .15s ease,transform .1s ease;}
   .btn:hover{color:var(--fg)!important;border-color:var(--fg)!important;}
@@ -38,16 +39,23 @@
   .pill:hover{border-color:var(--accent)!important;color:var(--accent)!important;background:var(--accent-soft)!important;transform:translateY(-2px);}
   .ul:hover{border-bottom-color:var(--accent)!important;}
   .card:hover{color:var(--accent)!important;background:var(--accent-soft)!important;transform:translateX(4px)!important;}
+  .card:active{transform:translateX(4px) scale(.994)!important;}
   .mlink:hover{color:var(--accent)!important;}
   /* micro-interactions */
   .arrow{display:inline-block;transition:transform .2s ease;}
   .card:hover .arrow{transform:translate(3px,-3px);}
+  #themeGlyph{display:inline-block;}
+  #themeGlyph.swap{animation:spinIn .38s cubic-bezier(.34,1.4,.5,1) both;}
   .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
   .reveal.in{opacity:1;transform:none;}
+  /* keyboard focus — accent ring, mouse clicks stay clean */
+  a:focus-visible,button:focus-visible,input:focus-visible,.card:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px;}
+  :focus:not(:focus-visible){outline:none;}
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important;scroll-behavior:auto!important;}
     .reveal{opacity:1!important;transform:none!important;transition:none!important;}
-    .pill:hover,.card:hover,.card:hover .arrow{transform:none!important;}
+    .pill:hover,.card:hover,.card:active,.card:hover .arrow{transform:none!important;}
+    #themeGlyph.swap{animation:none!important;}
   }
 </style>
 </head>
@@ -184,6 +192,26 @@
       </div>
     </section>
 
+    <section id="writing" class="reveal">
+      <div style="display:flex;align-items:center;gap:16px;margin:74px 0 4px;">
+        <span style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);">Writing</span>
+        <span style="flex:1;height:1px;background:var(--line);"></span>
+        <a href="writing.html" class="mlink" style="font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--faint);text-decoration:none;transition:color .15s ease;">All ↗</a>
+      </div>
+      <div style="border-bottom:1px solid var(--line);">
+        <a href="posts/fitting-a-transformer-into-16mb.html" class="card" style="display:grid;grid-template-columns:1fr auto;gap:18px;align-items:start;padding:24px 10px;border-top:1px solid var(--line);text-decoration:none;color:var(--fg);transition:color .18s ease,background .18s ease,transform .18s ease;border-radius:8px;">
+          <div>
+            <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+              <span style="font-size:21px;font-weight:500;letter-spacing:-0.01em;font-family:var(--display-font);">Fitting a transformer into 16 megabytes</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);">Jul 2026 · 6 min</span>
+            </div>
+            <p style="margin:7px 0 0;font-size:14.5px;line-height:1.55;color:var(--muted);max-width:520px;">What breaks when you push weight quantization from int8 down to int6, and what it took to stabilize training afterward.</p>
+          </div>
+          <span class="arrow" style="font-family:'Geist Mono',monospace;font-size:14px;color:var(--faint);padding-top:4px;">↗</span>
+        </a>
+      </div>
+    </section>
+
     <section id="experience" class="reveal">
       <div style="display:flex;align-items:center;gap:16px;margin:74px 0 4px;">
         <span style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);">Experience</span>
@@ -285,6 +313,9 @@
     try { localStorage.setItem('lb-theme', theme); } catch (e) {}
     applyTheme(theme);
     themeGlyph.textContent = glyph();
+    themeGlyph.classList.remove('swap');
+    void themeGlyph.offsetWidth; // restart animation
+    themeGlyph.classList.add('swap');
   }
   themeBtn.addEventListener('click', toggleTheme);
 
@@ -303,6 +334,7 @@
   var input = document.getElementById('cmdInput');
   var listEl = document.getElementById('cmdList');
   var selected = 0;
+  var copied = false;
 
   function go(id) {
     var el = document.getElementById(id);
@@ -311,10 +343,15 @@
   }
   function nav(u) { window.location.href = u; }
   function ext(u) { window.open(u, '_blank', 'noopener'); closeCmd(); }
-  function copyEmail() { try { navigator.clipboard.writeText('lbere033@uottawa.ca'); } catch (e) {} closeCmd(); }
+  function copyEmail() {
+    try { navigator.clipboard.writeText('lbere033@uottawa.ca'); } catch (e) {}
+    copied = true; renderList();
+    setTimeout(function () { copied = false; if (overlay.style.display === 'flex') renderList(); }, 1200);
+  }
 
   var commands = [
     { label: 'Selected Work', hint: 'Section', run: function () { go('work'); } },
+    { label: 'Writing', hint: 'Section', run: function () { go('writing'); } },
     { label: 'Experience', hint: 'Section', run: function () { go('experience'); } },
     { label: 'Stack', hint: 'Section', run: function () { go('stack'); } },
     { label: 'Contact', hint: 'Section', run: function () { go('contact'); } },
@@ -324,6 +361,8 @@
     { label: 'Offline-First Match-Logging App', hint: 'Project', run: function () { nav('project.html?p=match-logging'); } },
     { label: 'Yapchain', hint: 'Project', run: function () { nav('project.html?p=yapchain'); } },
     { label: 'spud', hint: 'Project', run: function () { nav('project.html?p=spud'); } },
+    { label: 'Fitting a transformer into 16 megabytes', hint: 'Post', run: function () { nav('posts/fitting-a-transformer-into-16mb.html'); } },
+    { label: 'All posts', hint: 'Page', run: function () { nav('writing.html'); } },
     { label: 'Toggle theme', hint: 'Action', run: function () { toggleTheme(); closeCmd(); } },
     { label: 'Copy email', hint: 'Action', run: function () { copyEmail(); } },
     { label: 'GitHub', hint: 'External', run: function () { ext('https://github.com/LUIDevo'); } },
@@ -342,10 +381,11 @@
     listEl.innerHTML = '';
     items.forEach(function (c, i) {
       var active = i === selected;
+      var isCopied = copied && c.label === 'Copy email';
       var row = document.createElement('div');
-      row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;cursor:pointer;border-radius:9px;transition:background .12s ease;color:' + (active ? 'var(--accent)' : 'var(--fg)') + ';background:' + (active ? 'var(--accent-soft)' : 'transparent') + ';';
+      row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;cursor:pointer;border-radius:9px;transition:background .12s ease,color .12s ease;color:' + (active ? 'var(--accent)' : 'var(--fg)') + ';background:' + (active ? 'var(--accent-soft)' : 'transparent') + ';';
       var l = document.createElement('span'); l.style.fontSize = '14px'; l.textContent = c.label;
-      var h = document.createElement('span'); h.style.cssText = "font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--faint);text-transform:uppercase;letter-spacing:0.07em;"; h.textContent = c.hint;
+      var h = document.createElement('span'); h.style.cssText = "font-family:'Geist Mono',monospace;font-size:10.5px;color:" + (isCopied ? 'var(--accent)' : 'var(--faint)') + ";text-transform:uppercase;letter-spacing:0.07em;"; h.textContent = isCopied ? 'Copied ✓' : c.hint;
       row.appendChild(l); row.appendChild(h);
       row.addEventListener('mouseenter', function () { selected = i; renderList(); });
       row.addEventListener('click', function () { c.run(); });

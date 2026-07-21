@@ -1,0 +1,137 @@
+/* ---------------------------------------------------------------------------
+   post.css — shared stylesheet for blog posts.
+
+   Everything a post page needs: the site tokens, article prose, figures, and
+   the chart component styles consumed by js/charts.js. New posts link this
+   file and write plain markup; see DESIGN.md for the system reference and
+   styleguide.html for live specimens.
+--------------------------------------------------------------------------- */
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --bg: #f7f6f3; --fg: #191917; --muted: #54534d; --faint: #73716a;
+  --line: rgba(20, 20, 18, 0.14); --card: #ffffff; --card2: #eceae4;
+  --accent: #2b5fd9; --accent-soft: rgba(43, 95, 217, 0.08);
+  /* code tokens — oxocarbon (IBM Carbon) hues. Light theme uses the darker
+     Carbon 60/70 variants for contrast on white --card; comment stays gray. */
+  --code-com: var(--faint); --code-kw: #8a3ffc;
+  --code-fn: #0f62fe; --code-num: #007d79;
+  /* chart roles — series palette validated against these surfaces (DESIGN.md) */
+  --chart-surface: #ffffff; --chart-grid: #ecebe7; --chart-axis: #d2d0ca;
+  --series-1: #2a78d6;   /* blue    */
+  --series-2: #008300;   /* green   */
+  --series-3: #e87ba4;   /* magenta */
+  --series-4: #eda100;   /* yellow  */
+  --series-5: #4a3aa7;   /* violet  */
+  --series-6: #eb6834;   /* orange  */
+}
+
+[data-theme="dark"] {
+  --bg: #0c0c0e; --fg: #ededee; --muted: #8c8c92; --faint: #56565c;
+  --line: rgba(255, 255, 255, 0.12); --card: #161619; --card2: #1c1c20;
+  --accent: #7099ff; --accent-soft: rgba(112, 153, 255, 0.13);
+  /* oxocarbon bright variants on dark --card */
+  --code-kw: #be95ff; --code-fn: #78a9ff; --code-num: #3ddbd9;
+  --chart-surface: #161619; --chart-grid: #232327; --chart-axis: #3a3a40;
+  --series-1: #3987e5;   /* blue    */
+  --series-2: #2bb849;   /* green   — one step above the equal-weight band (see DESIGN.md) */
+  --series-3: #d55181;   /* magenta */
+  --series-4: #c98500;   /* yellow  */
+  --series-5: #9085e9;   /* violet  */
+  --series-6: #d95926;   /* orange  */
+}
+
+body { background: var(--bg); }
+::selection { background: var(--accent); color: #fff; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes spinIn {
+  from { opacity: 0; transform: rotate(-75deg); }
+  to { opacity: 1; transform: none; }
+}
+
+/* shared hover behaviors (v1 idiom) */
+.btn { transition: all .15s ease, transform .1s ease; }
+.btn:hover { color: var(--fg) !important; border-color: var(--fg) !important; }
+.btn:active { transform: scale(.92); }
+.flink { transition: color .15s ease; }
+.flink:hover { color: var(--fg) !important; }
+.ul { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .15s ease; }
+.ul:hover { border-bottom-color: var(--accent); }
+
+/* scroll reveal + theme-glyph swap (v1 idiom) */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+#themeGlyph { display: inline-block; }
+#themeGlyph.swap { animation: spinIn .38s cubic-bezier(.34, 1.4, .5, 1) both; }
+
+/* keyboard focus — accent ring, mouse clicks stay clean */
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+:focus:not(:focus-visible) { outline: none; }
+
+/* ---- article prose --------------------------------------------------------- */
+
+.prose { font-size: 16.5px; line-height: 1.62; color: var(--fg); }
+.prose p { margin: 0 0 16px; }
+.prose h2 { margin: 40px 0 12px; font-size: 21px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.3; }
+.prose ul { margin: 0 0 16px; padding-left: 22px; }
+.prose li { margin-bottom: 6px; }
+.prose blockquote { margin: 26px 0; padding: 0 0 0 18px; border-left: 2px solid var(--accent); color: var(--muted); font-style: italic; }
+.prose blockquote p { margin-bottom: 4px; }
+.prose code { font-family: 'Geist Mono', monospace; font-size: .85em; background: var(--accent-soft); border-radius: 4px; padding: 1px 5px; }
+.prose pre { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; overflow-x: auto; margin: 22px 0; line-height: 1.55; }
+.prose pre code { background: none; padding: 0; font-size: 12.5px; color: var(--fg); }
+.prose hr { border: none; border-top: 1px solid var(--line); margin: 40px auto; width: 80px; }
+
+/* syntax tokens — restrained: comments + keywords + calls + numbers only */
+.prose pre .tok-com { color: var(--code-com); font-style: italic; }
+.prose pre .tok-kw  { color: var(--code-kw); }
+.prose pre .tok-fn  { color: var(--code-fn); }
+.prose pre .tok-num { color: var(--code-num); }
+
+/* code copy button — appears on hover / keyboard focus */
+.copy-btn { position: absolute; top: 8px; right: 8px; height: 26px; padding: 0 9px; display: inline-flex; align-items: center; background: var(--card2); border: 1px solid var(--line); border-radius: 6px; color: var(--faint); font-family: 'Geist Mono', monospace; font-size: 10.5px; cursor: pointer; opacity: 0; transition: opacity .15s ease, color .15s ease, border-color .15s ease; }
+.prose pre:hover .copy-btn, .copy-btn:focus-visible { opacity: 1; }
+.copy-btn:hover { color: var(--fg); border-color: var(--fg); }
+.copy-btn.copied { color: var(--accent); border-color: var(--accent); opacity: 1; }
+@media (hover: none) { .copy-btn { opacity: 1; } }
+
+/* ---- figures & charts -------------------------------------------------------
+   Chart markup is generated by js/charts.js; these classes style it. Marks
+   carry series color; all text wears text tokens.
+---------------------------------------------------------------------------- */
+
+figure { margin: 30px 0; }
+figcaption { font-family: 'Geist Mono', monospace; font-size: 11.5px; color: var(--faint); margin-top: 10px; line-height: 1.6; }
+
+.chart { background: var(--chart-surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 10px; position: relative; }
+.chart svg { display: block; width: 100%; height: auto; }
+.chart-title { font-size: 14px; font-weight: 600; color: var(--fg); margin: 0 0 2px; font-family: 'Geist', 'Helvetica Neue', Arial, sans-serif; }
+.chart-subtitle { font-size: 12.5px; color: var(--muted); margin: 0 0 12px; font-family: 'Geist', 'Helvetica Neue', Arial, sans-serif; }
+.chart-legend { display: flex; gap: 18px; flex-wrap: wrap; margin: 8px 0 4px; }
+.chart-legend .key { display: inline-flex; align-items: center; gap: 6px; font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--muted); }
+.chart-legend .swatch { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
+.chart text { font-family: 'Geist Mono', monospace; font-size: 10.5px; fill: var(--faint); font-variant-numeric: tabular-nums; }
+.chart .direct-label { font-size: 11px; font-weight: 500; fill: var(--muted); }
+
+.chart-tooltip { position: absolute; pointer-events: none; background: var(--fg); color: var(--bg); font-family: 'Geist Mono', monospace; font-size: 11px; line-height: 1.5; padding: 7px 10px; border-radius: 6px; white-space: nowrap; opacity: 0; transition: opacity .1s ease; z-index: 10; font-variant-numeric: tabular-nums; }
+.chart-tooltip .tt-row { display: flex; align-items: center; gap: 6px; }
+.chart-tooltip .tt-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+
+.chart-data { margin-top: 10px; }
+.chart-data summary { font-family: 'Geist Mono', monospace; font-size: 10.5px; color: var(--faint); cursor: pointer; }
+.chart-table { width: 100%; border-collapse: collapse; font-family: 'Geist Mono', monospace; font-size: 11px; font-variant-numeric: tabular-nums; margin-top: 8px; }
+.chart-table th { text-align: right; padding: 4px 10px; border-bottom: 1px solid var(--line); color: var(--faint); font-weight: 500; }
+.chart-table td { text-align: right; padding: 4px 10px; border-bottom: 1px solid var(--line); color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  #themeGlyph.swap { animation: none !important; }
+}

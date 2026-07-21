@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design System — Louis Berenyi</title>
+<meta name="robots" content="noindex">
+<script>try{var t=localStorage.getItem('lb-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/post.css">
+<style>
+  .swatches{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0;}
+  .swatch{width:132px;}
+  .swatch .chip{height:52px;border-radius:8px;border:1px solid var(--line);}
+  .swatch .name{font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--faint);margin-top:6px;line-height:1.5;}
+  .spec{border-left:2px solid var(--line);padding-left:18px;margin:26px 0;}
+  .spec .note{font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--faint);margin-top:6px;}
+  .label-row{display:flex;align-items:center;gap:16px;margin:60px 0 4px;}
+  .label-row .lbl{font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);}
+  .label-row .fill{flex:1;height:1px;background:var(--line);}
+  .pill{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border:1px solid var(--accent);border-radius:999px;color:var(--accent);text-decoration:none;font-family:'Geist Mono',monospace;font-size:13px;transition:all .18s ease,transform .18s ease;}
+  .pill:hover{background:var(--accent-soft);transform:translateY(-2px);}
+  .tagchip{font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:3px 7px;}
+  .card:hover{color:var(--accent)!important;background:var(--accent-soft)!important;transform:translateX(4px)!important;}
+  .arrow{display:inline-block;transition:transform .2s ease;}
+  .card:hover .arrow{transform:translate(3px,-3px);}
+</style>
+</head>
+<body>
+<div style="min-height:100vh;background:var(--bg);color:var(--fg);font-family:'Geist','Helvetica Neue',Arial,sans-serif;transition:background .45s ease,color .45s ease;-webkit-font-smoothing:antialiased;">
+
+  <header style="max-width:720px;margin:0 auto;padding:28px 24px 12px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" class="flink" style="font-family:'Geist Mono',monospace;font-size:12.5px;letter-spacing:0.06em;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:9px;">
+      <span style="font-size:14px;">←</span> Index
+    </a>
+    <button id="themeBtn" class="btn" title="Toggle theme" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:15px;cursor:pointer;"><span id="themeGlyph">☾</span></button>
+  </header>
+
+  <main style="max-width:720px;margin:0 auto;padding:0 24px 60px;animation:fadeUp .6s ease both;">
+
+    <section style="padding:44px 0 8px;">
+      <div style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);text-transform:uppercase;letter-spacing:0.1em;">Internal reference · not linked from the site</div>
+      <h1 style="margin:14px 0 0;font-size:clamp(34px,5.5vw,52px);font-weight:500;letter-spacing:-0.025em;line-height:1.04;">Design System</h1>
+      <p style="margin:14px 0 0;font-size:18px;line-height:1.5;color:var(--muted);max-width:560px;">The rules this site is built from, extracted from the live pages. Written reference in <code style="font-family:'Geist Mono',monospace;font-size:.85em;background:var(--accent-soft);border-radius:4px;padding:1px 5px;">DESIGN.md</code>; toggle the theme to check both modes.</p>
+    </section>
+
+    <div class="label-row"><span class="lbl">01 — Color</span><span class="fill"></span></div>
+    <p style="font-size:14.5px;color:var(--muted);max-width:540px;line-height:1.6;">Warm paper and near-black ink, one blue accent. Every color is a CSS custom property; dark mode swaps the whole set via <span style="font-family:'Geist Mono',monospace;font-size:.85em;">data-theme</span>. The accent appears only on interactive things: links, hovers, the blockquote rule.</p>
+    <div class="swatches">
+      <div class="swatch"><div class="chip" style="background:var(--bg);"></div><div class="name">--bg · page</div></div>
+      <div class="swatch"><div class="chip" style="background:var(--card);"></div><div class="name">--card · raised surface</div></div>
+      <div class="swatch"><div class="chip" style="background:var(--card2);"></div><div class="name">--card2 · sunken surface</div></div>
+      <div class="swatch"><div class="chip" style="background:var(--fg);"></div><div class="name">--fg · primary text</div></div>
+      <div class="swatch"><div class="chip" style="background:var(--muted);"></div><div class="name">--muted · secondary text</div></div>
+      <div class="swatch"><div class="chip" style="background:var(--faint);"></div><div class="name">--faint · metadata</div></div>
+      <div class="swatch"><div class="chip" style="background:var(--accent);"></div><div class="name">--accent · interactive</div></div>
+      <div class="swatch"><div class="chip" style="background:var(--accent-soft);"></div><div class="name">--accent-soft · hover wash</div></div>
+    </div>
+
+    <p style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--faint);margin:28px 0 10px;">CHART SERIES — validated categorical palette, assign in order (see DESIGN.md)</p>
+    <div class="swatches">
+      <div class="swatch"><div class="chip" style="background:var(--series-1);"></div><div class="name">--series-1 · blue</div></div>
+      <div class="swatch"><div class="chip" style="background:var(--series-2);"></div><div class="name">--series-2 · green</div></div>
+      <div class="swatch"><div class="chip" style="background:var(--series-3);"></div><div class="name">--series-3 · magenta</div></div>
+      <div class="swatch"><div class="chip" style="background:var(--series-4);"></div><div class="name">--series-4 · yellow</div></div>
+      <div class="swatch"><div class="chip" style="background:var(--series-5);"></div><div class="name">--series-5 · violet</div></div>
+      <div class="swatch"><div class="chip" style="background:var(--series-6);"></div><div class="name">--series-6 · orange</div></div>
+    </div>
+
+    <div class="label-row"><span class="lbl">02 — Type</span><span class="fill"></span></div>
+    <p style="font-size:14.5px;color:var(--muted);max-width:540px;line-height:1.6;">Two faces: Geist for everything read, Geist Mono for everything scanned — dates, labels, chips, captions, chart text. Mono labels are the site&rsquo;s signature; they are always small, uppercase, letterspaced, and faint.</p>
+    <div class="spec">
+      <div style="font-size:clamp(40px,6.5vw,62px);font-weight:500;letter-spacing:-0.025em;line-height:1.0;">Display</div>
+      <div class="note">h1 index · clamp(40px, 6.5vw, 62px) · Geist 500 · tracking −0.025em</div>
+    </div>
+    <div class="spec">
+      <div style="font-size:clamp(30px,5vw,44px);font-weight:500;letter-spacing:-0.025em;line-height:1.08;">Page title</div>
+      <div class="note">h1 subpages · clamp(30–34px, 5vw, 44–52px)</div>
+    </div>
+    <div class="spec">
+      <div style="font-size:21px;font-weight:500;letter-spacing:-0.01em;">Item title — 21px Geist 500</div>
+      <div class="note">work rows, post rows, prose h2</div>
+    </div>
+    <div class="spec">
+      <div style="font-size:16.5px;line-height:1.62;">Body — 16.5–18px Geist 400, line-height 1.62. The intro paragraph runs 18px; article prose runs 16.5px.</div>
+      <div class="note">.prose · max column 720px</div>
+    </div>
+    <div class="spec">
+      <div style="font-size:14.5px;line-height:1.55;color:var(--muted);">Summary — 14.5px muted, max-width 520px. One or two sentences under an item title.</div>
+      <div class="note">card .sum</div>
+    </div>
+    <div class="spec">
+      <div style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);">Section label — mono 11.5px</div>
+      <div class="note">always with a hairline fill and optional count on the right</div>
+    </div>
+
+    <div class="label-row"><span class="lbl">03 — Components</span><span class="fill"></span></div>
+
+    <p style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--faint);margin:22px 0 10px;">PILL — call to action</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <a class="pill" href="#">GitHub ↗</a>
+      <a class="pill" href="#">Email ↗</a>
+    </div>
+
+    <p style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--faint);margin:28px 0 10px;">CHIP — tech tag</p>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+      <span class="tagchip">Rust</span><span class="tagchip">TypeScript</span><span class="tagchip">QAT</span>
+    </div>
+
+    <p style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--faint);margin:28px 0 10px;">CARD ROW — list entry (hover it)</p>
+    <div style="border-bottom:1px solid var(--line);">
+      <a href="#" class="card" style="display:grid;grid-template-columns:32px 1fr auto;gap:18px;align-items:start;padding:24px 10px;border-top:1px solid var(--line);text-decoration:none;color:var(--fg);transition:color .18s ease,background .18s ease,transform .18s ease;border-radius:8px;">
+        <span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);padding-top:6px;">01</span>
+        <div>
+          <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+            <span style="font-size:21px;font-weight:500;letter-spacing:-0.01em;">Entry title</span>
+            <span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);">2026</span>
+          </div>
+          <p style="margin:7px 0 0;font-size:14.5px;line-height:1.55;color:var(--muted);max-width:520px;">One sentence saying what it is and why it mattered. Hover: accent text, accent-soft wash, 4px slide, arrow nudge.</p>
+        </div>
+        <span class="arrow" style="font-family:'Geist Mono',monospace;font-size:14px;color:var(--faint);padding-top:4px;">↗</span>
+      </a>
+    </div>
+
+    <p style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--faint);margin:28px 0 10px;">PROSE ELEMENTS</p>
+    <div class="prose" style="border:1px solid var(--line);border-radius:12px;padding:8px 22px 2px;background:var(--card);">
+      <p>Body text with an <a class="ul" href="#">accent link</a> and <code>inline code</code>.</p>
+      <blockquote><p>Blockquote — accent rule, muted italic.</p></blockquote>
+      <pre><code>pre block — card surface, 12.5px mono</code></pre>
+    </div>
+
+    <div class="label-row"><span class="lbl">04 — Charts</span><span class="fill"></span></div>
+    <p style="font-size:14.5px;color:var(--muted);max-width:540px;line-height:1.6;">Rendered by <span style="font-family:'Geist Mono',monospace;font-size:.9em;">js/charts.js</span> into <span style="font-family:'Geist Mono',monospace;font-size:.9em;">.chart</span> containers, styled by <span style="font-family:'Geist Mono',monospace;font-size:.9em;">css/post.css</span>. Series colors are validated for color-vision safety and contrast in both themes (see DESIGN.md). Chart text always wears text tokens, never a series color. Every chart ships a hover tooltip and a data-table fallback.</p>
+
+    <figure>
+      <div class="chart" id="demo-line"></div>
+      <figcaption>Line chart — 2px lines, 8px end markers ringed in the surface color, legend plus direct end labels, crosshair tooltip, hairline solid grid. Series colors assigned in order from the six-slot validated palette above.</figcaption>
+    </figure>
+
+    <figure>
+      <div class="chart" id="demo-bar"></div>
+      <figcaption>Bar chart — single hue for a single series, 22px bars with a rounded data-end and square baseline, values at the tips, no legend (the title names the series).</figcaption>
+    </figure>
+
+    <div class="label-row"><span class="lbl">05 — Rules</span><span class="fill"></span></div>
+    <div class="prose">
+      <ul>
+        <li>The accent is interactive-only: links, hovers, the blockquote rule. Never headings, never body text, never decoration.</li>
+        <li>Mono is metadata-only: labels, dates, chips, captions, chart text, code. Prose never sets in mono.</li>
+        <li>Structure is drawn with 1px hairlines (<span style="font-family:'Geist Mono',monospace;font-size:.9em;">--line</span>); cards get radius 8–12px and no shadows.</li>
+        <li>Motion is hover feedback and one entry fade — nothing else animates, and <span style="font-family:'Geist Mono',monospace;font-size:.9em;">prefers-reduced-motion</span> kills all of it.</li>
+        <li>Charts: one y-axis always; never more series than the validated palette (six); assign series colors in slot order, never cycled; direct labels only at line ends and bar tips; grid recessive, data loud.</li>
+        <li>Both themes always: every new color gets a light and a dark value, and charts re-use the shared tokens so the toggle themes them for free.</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer style="max-width:720px;margin:0 auto;padding:40px 24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--faint);">
+    <a href="index.html" class="flink" style="color:var(--faint);text-decoration:none;">← Back to index</a>
+    <span>Design system reference</span>
+  </footer>
+
+</div>
+
+<script src="js/charts.js"></script>
+<script>
+(function () {
+  var root = document.documentElement;
+  function stored() { try { return localStorage.getItem('lb-theme'); } catch (e) { return null; } }
+  var theme = stored() || 'light';
+  root.setAttribute('data-theme', theme);
+  var themeGlyph = document.getElementById('themeGlyph');
+  themeGlyph.textContent = theme === 'dark' ? '☀' : '☾';
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('lb-theme', theme); } catch (e) {}
+    root.setAttribute('data-theme', theme);
+    themeGlyph.textContent = theme === 'dark' ? '☀' : '☾';
+  });
+
+  renderLineChart(document.getElementById('demo-line'), {
+    title: 'Specimen — two series over time',
+    subtitle: 'Placeholder data.',
+    xLabel: 'Week',
+    x: [1, 2, 3, 4, 5, 6, 7, 8],
+    series: [
+      { name: 'Series one', values: [12, 18, 15, 24, 28, 26, 34, 38] },
+      { name: 'Series two', values: [8, 10, 14, 13, 19, 22, 21, 27] }
+    ]
+  });
+
+  renderBarChart(document.getElementById('demo-bar'), {
+    title: 'Specimen — magnitude by category',
+    subtitle: 'Placeholder data.',
+    unit: 'MB',
+    items: [
+      { label: 'Alpha', value: 5.7 },
+      { label: 'Beta',  value: 5.1 },
+      { label: 'Gamma', value: 4.6 },
+      { label: 'Delta', value: 0.4 }
+    ]
+  });
+})();
+</script>
+</body>
+</html>
