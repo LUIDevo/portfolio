@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Can you talk your way past an AI resume screener? — Louis Berenyi</title>
-<meta name="description" content="I ran the same résumé, reworded eight ways, through an open-source AI resume screener ten times each — to see whether adjectives alone can move your score.">
+<meta name="description" content="Running the same resume, reworded, through an open-source AI resume screener to see whether adjectives alone can raise your score.">
 <script>try{var t=localStorage.getItem('lb-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,144 +32,78 @@
       <span>Jul 2026 · 7 min</span>
     </div>
 
-    <h1 style="margin:18px 0 0;font-size:clamp(30px,5vw,44px);font-weight:500;letter-spacing:-0.025em;line-height:1.08;">Can you talk your way past an AI&nbsp;resume screener?</h1>
-    <p style="margin:14px 0 0;font-size:18px;line-height:1.5;color:var(--muted);max-width:560px;">The same résumé, reworded eight ways, run through an open-source AI screener ten times each — to see whether adjectives alone can raise your score without changing a single fact.</p>
+    <h1 style="margin:18px 0 24px;font-size:clamp(30px,5vw,44px);font-weight:500;letter-spacing:-0.025em;line-height:1.08;">Can you talk your way past an AI resume screener?</h1>
 
-    <article class="prose" style="margin-top:40px;">
+    <article class="prose">
 
-      <p>AI agents have crept into hiring. Some companies now hand résumés to a
-      model that scores and ranks candidates before a person ever reads them. With
-      a human, the right words can shift their impression of you. So I wanted to
-      know: do the same tricks work on the machine? Can you raise your score by
-      <em>how</em> you write, without touching a single fact?</p>
+      <p>Recently, there has been a rise in the usage of AI agents in many fields, including hiring. These AI tools are now integrated in some companies, and are able to score resumes and rank candidates.
+      With people, you can change their impression of you with the right words. So, I wanted to see if you can use those same tricks on an AI hiring agent; are you able to raise your score by just <em>how</em> you write, without changing a single fact?</p>
 
       <h2>The setup</h2>
 
-      <p>I used the system prompt from HiringAgent, an AI résumé screener that was
-      recently open-sourced. The prompt tells the model to act as a technical
-      recruiter and rate a résumé out of 120, split across four categories &mdash;
-      open source (35), personal projects (30), work experience (25), technical
-      skills (10) &mdash; plus up to 20 bonus points. It carries a lot of baked-in
-      rules: your own GitHub repos don&rsquo;t count as open source (only
-      contributions to <em>other</em> people&rsquo;s projects do), a to-do app
-      scores near zero while something complex scores in the 20s, and programs like
-      Google Summer of Code earn bonus points.</p>
+      <p>I used the system prompt from HiringAgent, an AI resume screener that was recently
+      open-sourced.</p>
 
-      <p>I wrote eight versions of one résumé, all stating the same facts:</p>
+      <p>The prompt tells the model to act as a technical recruiter and rate a resume out of
+      120, split across four categories: open source (up to 35 points), personal projects
+      (up to 30), work experience (up to 25), and technical skills (up to 10), plus up to
+      20 bonus points. It also carries a lot of baked-in rules — personal GitHub repos
+      don't count as open source (only contributions to other people's projects do), basic
+      projects like to-do apps score near zero while complex ones score in the 20s, and
+      programs like Google Summer of Code earn bonus points.</p>
 
+      <p>I had several resume versions with the details listed below.</p>
       <ul>
-        <li><strong>R0</strong> &mdash; the plain, honest baseline; a standard résumé.</li>
-        <li><strong>R1&ndash;R4</strong> &mdash; the same facts with steadily more adjectives per version.</li>
-        <li><strong>RM</strong> &mdash; a &ldquo;mirror&rdquo; that deliberately echoes the screener&rsquo;s own system prompt, to see if borrowing its terms nets a higher score.</li>
-        <li><strong>RO</strong> &mdash; an &ldquo;optimized&rdquo; version aimed at AI screeners in general, not this one specifically.</li>
+        <li>R0 — The plain, honest baseline resume. It's meant to read as a standard resume.</li>
+        <li>R1–R4 — the same facts with steadily more adjectives per version.</li>
+        <li>RM - A "mirror" version. It specificly mirrors this system prompt, which is meant to see if using terms and ideas used in the system prompt net higher scores.</li>
+        <li>An "optimized" version — This version unlike the mirror version is aimed for general AI hiring agents and not targeting this specific system prompt.</li>
       </ul>
 
-      <p>Each version went through the reviewer ten times. The agent is an LLM, not
-      a fixed formula, so scores drifted from run to run and between batches. I
-      logged every run.</p>
+      <p>The resume's scores were recorded by running each resume through the reviewer 10 times and logging each run. The agent is an LLM, not a fixed formula so the scores varied on each run and between batches.</p>
 
       <h2>What I expected</h2>
 
-      <p>My guess: adjectives would tip the model slightly higher, up to a point.
-      Past some density of flowery language, the model would notice the
-      unnaturalness, start docking points, and read the résumé as
-      <em>worse</em>.</p>
+      <p>I expected that using adjectives could slightly tip the model to rate the resume higher. After a certain density of adjectives, eventually the model would catch on to the unnaturalness of the writing, and start adding deductions and viewing the resume negatively.</p>
 
       <h2>What actually happened</h2>
 
-      <p>Verbage barely mattered. For most versions the score hardly moved off the
-      baseline &mdash; the lightest and densest résumés landed within a point of
-      each other, and I couldn&rsquo;t confidently say any of them beat R0. Two
-      versions did stand out: the mirror (RM) and R3.</p>
+      <p>The density of verbage didn't make much of a difference. For most runs, it hardly changed the score from the baseline. The lightest and densest resumes landed within a point of each other, and I coudn't confidently say they beat the baseline.
+      However, two versions did "substantially" beat the baseline. The mirror, and R3.</p>
 
       <figure class="reveal">
         <div class="chart" id="chart-total"></div>
-        <figcaption>Fig. 1 &mdash; Mean total score by résumé version, out of 120.
-        Ten runs each; primary batch. Only RM and R3 pull meaningfully clear of the
-        R0 baseline &mdash; and, as it turns out, not reliably.</figcaption>
+        <figcaption>Fig. 1 — Mean total score by resume version, out of 120. Ten runs
+        each; primary batch. Only RM and R3 pull clear of the R0 baseline.</figcaption>
       </figure>
-
-      <p>The predicted backlash never came. Piling on adjectives didn&rsquo;t
-      trigger deductions; it just failed to help. Tracking two mid-scale
-      categories across the density ramp shows the shape of it &mdash; one metric
-      wanders upward inside the noise, the other stays flat &mdash; but neither
-      moves the way a real improvement would.</p>
 
       <figure class="reveal">
         <div class="chart" id="chart-density"></div>
-        <figcaption>Fig. 2 &mdash; Two categories across the adjective ramp, R0
-        (baseline) through R4. Open-source credit drifts up a little; personal
-        projects don&rsquo;t. Both stay inside run-to-run noise.</figcaption>
+        <figcaption>Fig. 2 — Two categories across the adjective ramp, R0 through R4.
+        Open-source credit drifts up a little; personal projects don't. Both stay inside
+        run-to-run noise.</figcaption>
       </figure>
 
-      <h2>The same résumé, two scores</h2>
+      <p>When I scored the <em>identical</em> baseline twice, the two batches came back at 77.1 and 74.9. The same resume was measured twice, but both batches returned different numbers. The same went for R3. After seeing how high the score was, I reran it and got an even higher score.</p>
 
-      <p>Here&rsquo;s the part that reframed the whole experiment. When I scored the
-      <em>identical</em> baseline in two separate batches, they came back at
-      <strong>77.1</strong> and <strong>74.9</strong>. Same résumé, same prompt,
-      two different numbers. R3 did it too: it scored well, so I reran it &mdash;
-      and got an even higher <strong>82.9</strong>, up from 81.0. The &ldquo;wins&rdquo;
-      were partly just the dice.</p>
+      <p>I first thought that the tool was unreliable. But after looking closer at the categorical scores, I saw that most categories only moves by a single point every run. Every category was reasonably similar between runs, which means that the system prompt was doing its job. The prompt could still differentiate a weak candidate from a strong one.</p>
 
-      <p>My first thought was that the tool was unreliable. But the categorical
-      scores told a subtler story: most categories only moved by a point or so
-      between runs, and stayed reasonably consistent version to version. The prompt
-      <em>was</em> doing its job &mdash; it could still tell a weak candidate from a
-      strong one. It just couldn&rsquo;t resolve fine differences.</p>
+      <p>By looking into the system prompt, it's easy to see why this occurs. The prompt defines a "low score" by the range 1-9 points, while it classifies a "high score" by 20-30. So it's not unreasonable for the model to have varying ranges between run to run, because the prompt doesn't clearly definte the difference between a 3 and an 8, both are classified as weak. This also made it clear for my experiment. If I were to accurately see if I could change the models score, then I would have to measure it hundreds if not 1000s of times. And judging from my results, the scores would barely pass the baseline in any meaningful way considering one more "strong project" is 20-30 points.</p>
 
-      <p>The prompt itself explains why. It defines a &ldquo;low&rdquo; score as
-      1&ndash;9 points and a &ldquo;high&rdquo; score as 20&ndash;30. Nothing pins
-      down the gap between a 3 and an 8 &mdash; both are just &ldquo;weak.&rdquo; So
-      the model wobbles freely inside each band. To detect a real effect from
-      wording, I&rsquo;d need to measure hundreds, maybe thousands of runs &mdash;
-      and from what I saw, the signal would barely clear the baseline anyway. One
-      genuinely strong project is worth 20&ndash;30 points; no amount of rewording
-      buys that.</p>
-
-      <h2>The noise isn&rsquo;t even</h2>
-
-      <p>The variation also wasn&rsquo;t spread evenly. The noisiest judgements were
-      bonus points and open-source credit; the skills list hardly budged. That
-      lines up with the rules &mdash; skills are close to a checklist, while
-      &ldquo;bonus&rdquo; and what counts as open source are exactly the fuzzy,
-      interpretive calls a language model is least consistent about.</p>
+      <p>The variation wasn't even either. The noisest judgements were bonus points and open-source credit, while the skills list hardly budged.</p>
 
       <figure class="reveal">
         <div class="chart" id="chart-noise"></div>
-        <figcaption>Fig. 3 &mdash; Run-to-run noise by category: standard deviation
-        across ten baseline runs, in points. The interpretive categories swing;
-        the checklist-like ones barely move.</figcaption>
+        <figcaption>Fig. 3 — Run-to-run noise by category: standard deviation across ten
+        baseline runs, in points. The interpretive categories swing; the checklist-like
+        ones barely move.</figcaption>
       </figure>
 
-      <blockquote class="reveal">
-        <p>The screener can tell strong from weak. It cannot tell a 3 from an 8 —
-        and that&rsquo;s exactly the gap wording tries to exploit.</p>
-      </blockquote>
-
-      <p>The optimized résumé (RO) was the real surprise: aimed at screeners in
-      general, it didn&rsquo;t beat the baseline at all &mdash; 76.7 against
-      R0&rsquo;s 77.1. Writing <em>for</em> the abstraction did nothing; only the
-      mirror, written straight at this prompt, nudged ahead, and even that sat
-      inside the noise.</p>
+      <p>Suprisingly, my "optimized" resume didn't beat the baseline at all.</p>
 
       <h2>So can you game it?</h2>
 
-      <p>My experiment was far from conclusive &mdash; the sample is small and the
-      target is noisy. But from what I gathered, swapping words and stacking
-      adjectives doesn&rsquo;t meaningfully change your score. My best average gain
-      was five or six points; one strong project is worth twenty or thirty. Against
-      other factors, three points is nothing.</p>
-
-      <p>And yet. Standing next to another candidate, six points can be the whole
-      margin. The effect is real but tiny, and whether tiny matters depends entirely
-      on who you&rsquo;re being compared to.</p>
-
-      <hr>
-
-      <p style="font-family:'Geist Mono',monospace;font-size:12.5px;color:var(--muted);">
-      Scores from the open-source HiringAgent system prompt, eight résumé variants,
-      ten runs each. Category maxima: open source 35 · projects 30 · experience 25
-      · skills 10 · bonus 20.</p>
+      <p>My experiment was far from conclusive due to the small sample size. But from what I could gather, changing the words and adding adjectives doesn't meaningfully change the resume score. My largest results on average upped the score by 5-6 points, while one strong project could net you an extra 20 or 30 points. However, sometimes even the smallest factor can make a big difference. In comparison to other factors 3 points doesn't make much difference, but side by side to another candidate, 6 points can make all the difference.</p>
 
     </article>
 
@@ -202,7 +136,7 @@
   });
 
   renderBarChart(document.getElementById('chart-total'), {
-    title: 'Mean total score by résumé version',
+    title: 'Mean total score by resume version',
     subtitle: 'Out of 120, ten runs each. R0 is the honest baseline.',
     unit: 'pts',
     items: [
@@ -234,7 +168,7 @@
     items: [
       { label: 'Bonus points',     value: 1.56 },
       { label: 'Open source',      value: 1.26 },
-      { label: 'Production',       value: 0.92 },
+      { label: 'Work experience',  value: 0.92 },
       { label: 'Personal projects', value: 0.83 },
       { label: 'Technical skills', value: 0.46 }
     ]
