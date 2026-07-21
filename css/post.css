@@ -108,6 +108,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 ---------------------------------------------------------------------------- */
 
 figure { margin: 30px 0; }
+figure img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 12px; }
 figcaption { font-family: 'Geist Mono', monospace; font-size: 11.5px; color: var(--faint); margin-top: 10px; line-height: 1.6; }
 
 .chart { background: var(--chart-surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 10px; position: relative; }
