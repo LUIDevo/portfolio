@@ -34,11 +34,11 @@ I expected that using adjectives could slightly tip the model to rate the resume
 The density of verbage didn't make much of a difference. For most runs, it hardly changed the score from the baseline. The lightest and densest resumes landed within a point of each other, and I coudn't confidently say they beat the baseline.
 However, two versions did "substantially" beat the baseline. The mirror, and R3. 
 
-When I scored the *identical* baseline twice, the two batches came back at 77.1 and 74.9. The same resume was measured twice, but both batches returned different numbers.
+When I scored the *identical* baseline twice, the two batches came back at 77.1 and 74.9. The same resume was measured twice, but both batches returned different numbers. The same went for R3. After seeing how high the score was, I reran it and got an even higher score.
 
 I first thought that the tool was unreliable. But after looking closer at the categorical scores, I saw that most categories only moves by a single point every run. Every category was reasonably similar between runs, which means that the system prompt was doing its job. The prompt could still differentiate a weak candidate from a strong one.
 
-By looking into the system prompt, it's easy to see why this occurs. The prompt defines a "low score" by the range 1-9, while it classifies a "high score" by 20-30. So it's not unreasonable for the model to have varying ranges between run to run, because the prompt doesn't clearly definte the difference between a 3 and an 8, both are classified as weak. This also made it clear for my experiment. If I were to accurately see if I could change the models score, then I would have to measure it hundreds if not 1000s of times. And judging from my results, the scores would barely pass the baseline in any meaningful way considering one more "strong project" is 20-30 points. 
+By looking into the system prompt, it's easy to see why this occurs. The prompt defines a "low score" by the range 1-9 points, while it classifies a "high score" by 20-30. So it's not unreasonable for the model to have varying ranges between run to run, because the prompt doesn't clearly definte the difference between a 3 and an 8, both are classified as weak. This also made it clear for my experiment. If I were to accurately see if I could change the models score, then I would have to measure it hundreds if not 1000s of times. And judging from my results, the scores would barely pass the baseline in any meaningful way considering one more "strong project" is 20-30 points. 
 
 The variation wasn't even either. The noisest judgements were bonus points and open-source credit, while the skills list hardly budged. 
 
@@ -46,4 +46,4 @@ Suprisingly, my "optimized" resume didn't beat the baseline at all.
 
 ## So can you game it?
 
-My experiment was far from conclusive due to the small sample size. But from what I could gather, changing the words and adding adjectives doesn't meaningfully change the resume score. My largest results on average upped the score by 3 points, while one strong project could net you an extra 20 or 30 points. However, sometimes even the smallest factor can make a big difference. In comparison to other factors 3 points doesn't make much difference, but side by side to another candidate, 3 points can make all the difference.
+My experiment was far from conclusive due to the small sample size. But from what I could gather, changing the words and adding adjectives doesn't meaningfully change the resume score. My largest results on average upped the score by 5-6 points, while one strong project could net you an extra 20 or 30 points. However, sometimes even the smallest factor can make a big difference. In comparison to other factors 3 points doesn't make much difference, but side by side to another candidate, 6 points can make all the difference.

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Can you talk your way past an AI resume screener? — Louis Berenyi</title>
+<meta name="description" content="I ran the same résumé, reworded eight ways, through an open-source AI resume screener ten times each — to see whether adjectives alone can move your score.">
+<script>try{var t=localStorage.getItem('lb-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/post.css">
+</head>
+<body>
+<div style="min-height:100vh;background:var(--bg);color:var(--fg);font-family:'Geist','Helvetica Neue',Arial,sans-serif;transition:background .45s ease,color .45s ease;-webkit-font-smoothing:antialiased;">
+
+  <header style="max-width:720px;margin:0 auto;padding:28px 24px 12px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="../writing.html" class="flink" style="font-family:'Geist Mono',monospace;font-size:12.5px;letter-spacing:0.06em;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:9px;">
+      <span style="font-size:14px;">←</span> Writing
+    </a>
+    <button id="themeBtn" class="btn" title="Toggle theme" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:15px;cursor:pointer;"><span id="themeGlyph">☾</span></button>
+  </header>
+
+  <main style="max-width:720px;margin:0 auto;padding:0 24px 40px;animation:fadeUp .6s ease both;">
+
+    <div style="display:flex;align-items:center;gap:12px;margin:44px 0 0;font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);">
+      <span>A2</span>
+      <span style="width:18px;height:1px;background:var(--line);"></span>
+      <span style="text-transform:uppercase;letter-spacing:0.1em;">LLMs / Evaluation</span>
+      <span style="flex:1;"></span>
+      <span>Jul 2026 · 7 min</span>
+    </div>
+
+    <h1 style="margin:18px 0 0;font-size:clamp(30px,5vw,44px);font-weight:500;letter-spacing:-0.025em;line-height:1.08;">Can you talk your way past an AI&nbsp;resume screener?</h1>
+    <p style="margin:14px 0 0;font-size:18px;line-height:1.5;color:var(--muted);max-width:560px;">The same résumé, reworded eight ways, run through an open-source AI screener ten times each — to see whether adjectives alone can raise your score without changing a single fact.</p>
+
+    <article class="prose" style="margin-top:40px;">
+
+      <p>AI agents have crept into hiring. Some companies now hand résumés to a
+      model that scores and ranks candidates before a person ever reads them. With
+      a human, the right words can shift their impression of you. So I wanted to
+      know: do the same tricks work on the machine? Can you raise your score by
+      <em>how</em> you write, without touching a single fact?</p>
+
+      <h2>The setup</h2>
+
+      <p>I used the system prompt from HiringAgent, an AI résumé screener that was
+      recently open-sourced. The prompt tells the model to act as a technical
+      recruiter and rate a résumé out of 120, split across four categories &mdash;
+      open source (35), personal projects (30), work experience (25), technical
+      skills (10) &mdash; plus up to 20 bonus points. It carries a lot of baked-in
+      rules: your own GitHub repos don&rsquo;t count as open source (only
+      contributions to <em>other</em> people&rsquo;s projects do), a to-do app
+      scores near zero while something complex scores in the 20s, and programs like
+      Google Summer of Code earn bonus points.</p>
+
+      <p>I wrote eight versions of one résumé, all stating the same facts:</p>
+
+      <ul>
+        <li><strong>R0</strong> &mdash; the plain, honest baseline; a standard résumé.</li>
+        <li><strong>R1&ndash;R4</strong> &mdash; the same facts with steadily more adjectives per version.</li>
+        <li><strong>RM</strong> &mdash; a &ldquo;mirror&rdquo; that deliberately echoes the screener&rsquo;s own system prompt, to see if borrowing its terms nets a higher score.</li>
+        <li><strong>RO</strong> &mdash; an &ldquo;optimized&rdquo; version aimed at AI screeners in general, not this one specifically.</li>
+      </ul>
+
+      <p>Each version went through the reviewer ten times. The agent is an LLM, not
+      a fixed formula, so scores drifted from run to run and between batches. I
+      logged every run.</p>
+
+      <h2>What I expected</h2>
+
+      <p>My guess: adjectives would tip the model slightly higher, up to a point.
+      Past some density of flowery language, the model would notice the
+      unnaturalness, start docking points, and read the résumé as
+      <em>worse</em>.</p>
+
+      <h2>What actually happened</h2>
+
+      <p>Verbage barely mattered. For most versions the score hardly moved off the
+      baseline &mdash; the lightest and densest résumés landed within a point of
+      each other, and I couldn&rsquo;t confidently say any of them beat R0. Two
+      versions did stand out: the mirror (RM) and R3.</p>
+
+      <figure class="reveal">
+        <div class="chart" id="chart-total"></div>
+        <figcaption>Fig. 1 &mdash; Mean total score by résumé version, out of 120.
+        Ten runs each; primary batch. Only RM and R3 pull meaningfully clear of the
+        R0 baseline &mdash; and, as it turns out, not reliably.</figcaption>
+      </figure>
+
+      <p>The predicted backlash never came. Piling on adjectives didn&rsquo;t
+      trigger deductions; it just failed to help. Tracking two mid-scale
+      categories across the density ramp shows the shape of it &mdash; one metric
+      wanders upward inside the noise, the other stays flat &mdash; but neither
+      moves the way a real improvement would.</p>
+
+      <figure class="reveal">
+        <div class="chart" id="chart-density"></div>
+        <figcaption>Fig. 2 &mdash; Two categories across the adjective ramp, R0
+        (baseline) through R4. Open-source credit drifts up a little; personal
+        projects don&rsquo;t. Both stay inside run-to-run noise.</figcaption>
+      </figure>
+
+      <h2>The same résumé, two scores</h2>
+
+      <p>Here&rsquo;s the part that reframed the whole experiment. When I scored the
+      <em>identical</em> baseline in two separate batches, they came back at
+      <strong>77.1</strong> and <strong>74.9</strong>. Same résumé, same prompt,
+      two different numbers. R3 did it too: it scored well, so I reran it &mdash;
+      and got an even higher <strong>82.9</strong>, up from 81.0. The &ldquo;wins&rdquo;
+      were partly just the dice.</p>
+
+      <p>My first thought was that the tool was unreliable. But the categorical
+      scores told a subtler story: most categories only moved by a point or so
+      between runs, and stayed reasonably consistent version to version. The prompt
+      <em>was</em> doing its job &mdash; it could still tell a weak candidate from a
+      strong one. It just couldn&rsquo;t resolve fine differences.</p>
+
+      <p>The prompt itself explains why. It defines a &ldquo;low&rdquo; score as
+      1&ndash;9 points and a &ldquo;high&rdquo; score as 20&ndash;30. Nothing pins
+      down the gap between a 3 and an 8 &mdash; both are just &ldquo;weak.&rdquo; So
+      the model wobbles freely inside each band. To detect a real effect from
+      wording, I&rsquo;d need to measure hundreds, maybe thousands of runs &mdash;
+      and from what I saw, the signal would barely clear the baseline anyway. One
+      genuinely strong project is worth 20&ndash;30 points; no amount of rewording
+      buys that.</p>
+
+      <h2>The noise isn&rsquo;t even</h2>
+
+      <p>The variation also wasn&rsquo;t spread evenly. The noisiest judgements were
+      bonus points and open-source credit; the skills list hardly budged. That
+      lines up with the rules &mdash; skills are close to a checklist, while
+      &ldquo;bonus&rdquo; and what counts as open source are exactly the fuzzy,
+      interpretive calls a language model is least consistent about.</p>
+
+      <figure class="reveal">
+        <div class="chart" id="chart-noise"></div>
+        <figcaption>Fig. 3 &mdash; Run-to-run noise by category: standard deviation
+        across ten baseline runs, in points. The interpretive categories swing;
+        the checklist-like ones barely move.</figcaption>
+      </figure>
+
+      <blockquote class="reveal">
+        <p>The screener can tell strong from weak. It cannot tell a 3 from an 8 —
+        and that&rsquo;s exactly the gap wording tries to exploit.</p>
+      </blockquote>
+
+      <p>The optimized résumé (RO) was the real surprise: aimed at screeners in
+      general, it didn&rsquo;t beat the baseline at all &mdash; 76.7 against
+      R0&rsquo;s 77.1. Writing <em>for</em> the abstraction did nothing; only the
+      mirror, written straight at this prompt, nudged ahead, and even that sat
+      inside the noise.</p>
+
+      <h2>So can you game it?</h2>
+
+      <p>My experiment was far from conclusive &mdash; the sample is small and the
+      target is noisy. But from what I gathered, swapping words and stacking
+      adjectives doesn&rsquo;t meaningfully change your score. My best average gain
+      was five or six points; one strong project is worth twenty or thirty. Against
+      other factors, three points is nothing.</p>
+
+      <p>And yet. Standing next to another candidate, six points can be the whole
+      margin. The effect is real but tiny, and whether tiny matters depends entirely
+      on who you&rsquo;re being compared to.</p>
+
+      <hr>
+
+      <p style="font-family:'Geist Mono',monospace;font-size:12.5px;color:var(--muted);">
+      Scores from the open-source HiringAgent system prompt, eight résumé variants,
+      ten runs each. Category maxima: open source 35 · projects 30 · experience 25
+      · skills 10 · bonus 20.</p>
+
+    </article>
+
+  </main>
+
+  <footer style="max-width:720px;margin:0 auto;padding:40px 24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--faint);">
+    <a href="../writing.html" class="flink" style="color:var(--faint);text-decoration:none;">← All posts</a>
+    <span>© 2026 Louis Berenyi</span>
+  </footer>
+
+</div>
+
+<script src="../js/charts.js"></script>
+<script>
+(function () {
+  var root = document.documentElement;
+  function stored() { try { return localStorage.getItem('lb-theme'); } catch (e) { return null; } }
+  var theme = stored() || 'light';
+  root.setAttribute('data-theme', theme);
+  var themeGlyph = document.getElementById('themeGlyph');
+  themeGlyph.textContent = theme === 'dark' ? '☀' : '☾';
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('lb-theme', theme); } catch (e) {}
+    root.setAttribute('data-theme', theme);
+    themeGlyph.textContent = theme === 'dark' ? '☀' : '☾';
+    themeGlyph.classList.remove('swap');
+    void themeGlyph.offsetWidth; // restart animation
+    themeGlyph.classList.add('swap');
+  });
+
+  renderBarChart(document.getElementById('chart-total'), {
+    title: 'Mean total score by résumé version',
+    subtitle: 'Out of 120, ten runs each. R0 is the honest baseline.',
+    unit: 'pts',
+    items: [
+      { label: 'R0 · baseline',  value: 77.1 },
+      { label: 'R1',             value: 76.2 },
+      { label: 'R2',             value: 77.3 },
+      { label: 'R3',             value: 81.0 },
+      { label: 'R4',             value: 76.8 },
+      { label: 'RM · mirror',    value: 79.3 },
+      { label: 'RO · optimized', value: 76.7 }
+    ]
+  });
+
+  renderLineChart(document.getElementById('chart-density'), {
+    title: 'Category score across the adjective ramp',
+    subtitle: 'R0 (baseline) through R4, each version denser with adjectives.',
+    xLabel: 'Version (0 = R0)',
+    x: [0, 1, 2, 3, 4],
+    series: [
+      { name: 'Open source',      values: [19.0, 20.1, 20.8, 21.4, 20.9] },
+      { name: 'Personal projects', values: [23.9, 23.0, 23.1, 24.3, 23.2] }
+    ]
+  });
+
+  renderBarChart(document.getElementById('chart-noise'), {
+    title: 'Run-to-run noise by category',
+    subtitle: 'Standard deviation across ten baseline runs, in points.',
+    unit: 'σ',
+    items: [
+      { label: 'Bonus points',     value: 1.56 },
+      { label: 'Open source',      value: 1.26 },
+      { label: 'Production',       value: 0.92 },
+      { label: 'Personal projects', value: 0.83 },
+      { label: 'Technical skills', value: 0.46 }
+    ]
+  });
+
+  // reveal figures & blockquote on scroll
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') window.location.href = '../writing.html';
+  });
+})();
+</script>
+</body>
+</html>
