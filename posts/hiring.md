@@ -26,19 +26,12 @@ Each version was scored 10 times, because there were variations in model score b
 
 ## What I expected
 
-That praise would help up to a point and then backfire — a sweet spot of
-confident-but-not-ridiculous language scoring highest.
+I expected that using adjectives could slightly tip the model to rate the resume higher. After a certain density of adjectives, eventually the model would catch on to the unnaturalness of the writing, and start adding deductions and viewing the resume negatively.
 
 ## What actually happened
 
-Adjectives didn't do much. Piling them on left the score basically flat: the
-lightest and densest versions landed within a point of each other, and neither
-clearly beat the honest baseline. Whatever "write more impressively" is supposed to
-do, it wasn't a reliable lever.
-
-Two versions did edge up — the mirror (about +3) and one heavy-wording version
-(about +5). But that's where the real story starts, because those edges are about
-the same size as the scorer's own random wobble.
+The density of verbage didn't make much of a difference. For most runs, it hardly changed the score from the baseline. The lightest and densest resumes landed within a point of each other, and I coudn't confidently say they beat the baseline.
+However, two versions did make some difference. The mirror, and R3. 
 
 ## The noise, read carefully
 
