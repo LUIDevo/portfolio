@@ -22,7 +22,7 @@ a few open-source contributions. Then I rewrote the same resume using only diffe
 - A "mirror" version that echoed the scorer's own vocabulary back at it.
 - An "optimized" version — my best attempt at a resume tuned for AI screeners in general.
 
-Each version was scored 10 times, because there were variations in model score between each run.
+Each resume was scored 10 times in one batch, because there were variations in model score between each run.
 
 ## What I expected
 
@@ -31,20 +31,11 @@ I expected that using adjectives could slightly tip the model to rate the resume
 ## What actually happened
 
 The density of verbage didn't make much of a difference. For most runs, it hardly changed the score from the baseline. The lightest and densest resumes landed within a point of each other, and I coudn't confidently say they beat the baseline.
-However, two versions did make some difference. The mirror, and R3. 
+However, two versions did "substantially" beat the baseline. The mirror, and R3. 
 
-## The noise, read carefully
+When I scored the *identical* baseline twice, the two batches came back at 77.1 and 74.9. The same resume was measured twice, but both batches returned different numbers.
 
-When I scored the *identical* baseline twice, the two batches came back at 77.1 and
-74.9. Same resume, different number.
-
-My first instinct was "this tool is unreliable." That's too strong. Look closer and
-the per-category scores are stable — each category moves by about a point run to
-run, on scales of 25 or 35. And the noise never pushes a category across the lines
-that matter: the projects section scored "strong" (low 20s) every single time and
-never once dropped into the weak-project range the rubric reserves for the low
-single digits. So the tool has no trouble separating a clearly strong candidate from
-a clearly weak one. The signal it's built for is much bigger than its noise.
+I first thought that the tool was unreliable. But after looking closer at the categorical scores, I saw that most categories only moves by a single point every run. Every category was reasonably similar between runs, which means that the system prompt was doing its job. The prompt could still differentiate a weak candidate from a strong one.
 
 The problem isn't reliability, it's resolution. The gap between a good and a bad
 candidate is 15–20 points in a category. The gap I was creating by rewording — 1 to
