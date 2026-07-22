@@ -142,9 +142,9 @@
 
       <p>I first thought that the tool was unreliable. But after looking closer at the categorical scores, I saw that most categories only move by a single point every run. Every category was reasonably similar between runs, which means that the system prompt was doing its job. The prompt could still differentiate a weak candidate from a strong one.</p>
 
-      <p>By looking into the system prompt, it's easy to see why this occurs. The prompt defines a "low score" by the range 1-9 points, while it classifies a "high score" by 20-30. So it's not unreasonable for the model to have varying ranges between run to run, because the prompt doesn't clearly definte the difference between a 3 and an 8, both are classified as weak. This also made it clear for my experiment. If I were to accurately see if I could change the models score, then I would have to measure it hundreds if not 1000s of times. And judging from my results, the scores would barely pass the baseline in any meaningful way considering one more "strong project" is 20-30 points.</p>
+      <p>By looking into the system prompt, it's easy to see why this occurs. The prompt defines a "low score" by the range 1-9 points, while it classifies a "high score" by 20-30. So it's not unreasonable for the model to have varying ranges from run to run, because the prompt doesn't clearly define the difference between a 3 and an 8, both are classified as weak. This also made it clear for my experiment. If I were to accurately see if I could change the model's score, then I would have to measure it hundreds if not 1000s of times. And judging from my results, the scores would barely pass the baseline in any meaningful way considering one more "strong project" is 20-30 points.</p>
 
-      <p>The variation wasn't even either. The noisest judgements were bonus points and open-source credit, while the skills list hardly budged. This could possibly due to how the AI percieved trustworthiness. From the AI's perspective, a resume is much more likely to embezzle details for their own projects, but much less likely to do so for projects owned by other people. </p>
+      <p>The variation wasn't even either. The noisiest judgments were bonus points and open-source credit, while the skills list hardly budged. This could possibly be due to how the AI perceived trustworthiness. From the AI's perspective, a candidate is much more likely to embellish details about their own projects, but much less likely to do so for projects owned by other people. </p>
 
       <figure class="reveal">
         <div class="chart" id="chart-noise"></div>
@@ -153,7 +153,7 @@
         ones barely move.</figcaption>
       </figure>
 
-      <p>Suprisingly, my "optimized" resume didn't beat the baseline at all.</p>
+      <p>Surprisingly, my "optimized" resume didn't beat the baseline at all.</p>
 
       <h2>So can you game it?</h2>
 
