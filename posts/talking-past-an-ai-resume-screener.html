@@ -144,7 +144,7 @@
 
       <p>By looking into the system prompt, it's easy to see why this occurs. The prompt defines a "low score" by the range 1-9 points, while it classifies a "high score" by 20-30. So it's not unreasonable for the model to have varying ranges between run to run, because the prompt doesn't clearly definte the difference between a 3 and an 8, both are classified as weak. This also made it clear for my experiment. If I were to accurately see if I could change the models score, then I would have to measure it hundreds if not 1000s of times. And judging from my results, the scores would barely pass the baseline in any meaningful way considering one more "strong project" is 20-30 points.</p>
 
-      <p>The variation wasn't even either. The noisest judgements were bonus points and open-source credit, while the skills list hardly budged.</p>
+      <p>The variation wasn't even either. The noisest judgements were bonus points and open-source credit, while the skills list hardly budged. This could possible due to how the AI percieves trustworthiness. From the AI's perspective, a resume is much more likely to embezzle details for their own projects, but much less likely to do so for projects owned by other people. </p>
 
       <figure class="reveal">
         <div class="chart" id="chart-noise"></div>
