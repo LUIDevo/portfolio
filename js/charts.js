@@ -172,8 +172,11 @@
       stroke: 'var(--chart-axis)', 'stroke-width': 1
     }));
 
-    // x ticks: first, middle, last
-    [0, Math.floor((cfg.x.length - 1) / 2), cfg.x.length - 1].forEach(function (i) {
+    // x ticks: every point when there are few enough to fit; else first/middle/last
+    var xTickIdx = cfg.x.length <= 6
+      ? cfg.x.map(function (_, i) { return i; })
+      : [0, Math.floor((cfg.x.length - 1) / 2), cfg.x.length - 1];
+    xTickIdx.forEach(function (i) {
       var lbl = svgEl('text', {
         x: sx(cfg.x[i]), y: pad.top + ph + 22,
         'text-anchor': i === 0 ? 'start' : (i === cfg.x.length - 1 ? 'end' : 'middle')
