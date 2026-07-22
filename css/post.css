@@ -131,6 +131,20 @@ figcaption { font-family: 'Geist Mono', monospace; font-size: 11.5px; color: var
 .chart-table th { text-align: right; padding: 4px 10px; border-bottom: 1px solid var(--line); color: var(--faint); font-weight: 500; }
 .chart-table td { text-align: right; padding: 4px 10px; border-bottom: 1px solid var(--line); color: var(--muted); }
 
+/* ---- stat table (chart alternative for exact-value figures) ---------------- */
+.stat-shell { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--chart-surface); }
+.stat-table { width: 100%; border-collapse: collapse; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.stat-table thead th { text-align: left; font-weight: 500; font-size: 11px; color: var(--faint); padding: 11px 14px 8px; border-bottom: 1px solid var(--line); font-family: 'Geist', 'Helvetica Neue', Arial, sans-serif; }
+.stat-table thead th.num { text-align: right; }
+.stat-table tbody td { padding: 8px 14px; border-bottom: 1px solid var(--line); color: var(--fg); }
+.stat-table tbody tr:last-child td { border-bottom: none; }
+.stat-table tbody tr:hover td { background: var(--card2); }
+.stat-table td.label { font-weight: 500; font-family: 'Geist', 'Helvetica Neue', Arial, sans-serif; }
+.stat-table td.num { text-align: right; font-family: 'Geist Mono', monospace; }
+.stat-table td.delta { text-align: right; font-family: 'Geist Mono', monospace; color: var(--muted); font-size: 11.5px; }
+.stat-table tr.baseline td.label { color: var(--muted); font-weight: 400; }
+.stat-table tr.pull td.num { font-weight: 600; }
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; scroll-behavior: auto !important; }
   .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }

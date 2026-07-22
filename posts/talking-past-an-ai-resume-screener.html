@@ -77,7 +77,56 @@
       However, two versions did "substantially" beat the baseline. The mirror, and R3.</p>
 
       <figure class="reveal">
-        <div class="chart" id="chart-total"></div>
+        <p class="chart-title">Mean total score by resume version</p>
+        <p class="chart-subtitle">Out of 120, ten runs each. R0 is the honest baseline.</p>
+        <div class="stat-shell">
+          <table class="stat-table">
+            <thead>
+              <tr>
+                <th>Version</th>
+                <th class="num">Mean score</th>
+                <th class="num">Δ vs. R0</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="baseline">
+                <td class="label">R0 <span style="color:var(--faint);font-weight:400;">· baseline</span></td>
+                <td class="num">77.1</td>
+                <td class="delta">—</td>
+              </tr>
+              <tr>
+                <td class="label">R1</td>
+                <td class="num">76.2</td>
+                <td class="delta">−0.9</td>
+              </tr>
+              <tr>
+                <td class="label">R2</td>
+                <td class="num">77.3</td>
+                <td class="delta">+0.2</td>
+              </tr>
+              <tr class="pull">
+                <td class="label">R3</td>
+                <td class="num">81.0</td>
+                <td class="delta">+3.9</td>
+              </tr>
+              <tr>
+                <td class="label">R4</td>
+                <td class="num">76.8</td>
+                <td class="delta">−0.3</td>
+              </tr>
+              <tr class="pull">
+                <td class="label">RM · mirror</td>
+                <td class="num">79.3</td>
+                <td class="delta">+2.2</td>
+              </tr>
+              <tr>
+                <td class="label">RO · optimized</td>
+                <td class="num">76.7</td>
+                <td class="delta">−0.4</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <figcaption>Fig. 1 — Mean total score by resume version, out of 120. Ten runs
         each; primary batch. Only RM and R3 pull clear of the R0 baseline.</figcaption>
       </figure>
@@ -138,21 +187,6 @@
     themeGlyph.classList.remove('swap');
     void themeGlyph.offsetWidth; // restart animation
     themeGlyph.classList.add('swap');
-  });
-
-  renderBarChart(document.getElementById('chart-total'), {
-    title: 'Mean total score by resume version',
-    subtitle: 'Out of 120, ten runs each. R0 is the honest baseline.',
-    unit: 'pts',
-    items: [
-      { label: 'R0 · baseline',  value: 77.1 },
-      { label: 'R1',             value: 76.2 },
-      { label: 'R2',             value: 77.3 },
-      { label: 'R3',             value: 81.0 },
-      { label: 'R4',             value: 76.8 },
-      { label: 'RM · mirror',    value: 79.3 },
-      { label: 'RO · optimized', value: 76.7 }
-    ]
   });
 
   renderLineChart(document.getElementById('chart-density'), {
