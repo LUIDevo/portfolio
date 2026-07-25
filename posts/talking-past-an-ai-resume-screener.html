@@ -11,6 +11,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/post.css">
+<style>
+  /* verbatim model-output excerpt: mono file:line cite + left-bar quote */
+  .excerpt { margin: 22px 0; }
+  .excerpt + .excerpt { margin-top: 12px; }
+  .excerpt .cite { font-family: 'Geist Mono', monospace; font-size: 11.5px; color: var(--faint); margin: 0 0 8px; }
+  .excerpt .cite b { color: var(--muted); font-weight: 500; }
+  .excerpt blockquote { margin: 0; padding: 9px 0 9px 16px; border-left: 2px solid var(--accent); font-family: 'Geist Mono', monospace; font-size: 12.5px; line-height: 1.6; color: var(--fg); font-style: normal; }
+  .excerpt .mark { color: var(--accent); font-weight: 500; }
+</style>
 </head>
 <body>
 <div style="min-height:100vh;background:var(--bg);color:var(--fg);font-family:'Geist','Helvetica Neue',Arial,sans-serif;transition:background .45s ease,color .45s ease;-webkit-font-smoothing:antialiased;">
@@ -154,6 +163,17 @@
       </figure>
 
       <p>Surprisingly, my "optimized" resume didn't beat the baseline at all.</p>
+
+      <p>The agent takes in vocabulary that isn't in the
+      baseline and interprets it. "production-minded" appears only in the reworded
+      resumes, yet the screener repeats it back, in its own words, as a strength:</p>
+
+      <div class="excerpt reveal">
+        <p class="cite"><b>outputs/r3/second_run/run_08.txt</b>:16 — key_strengths</p>
+        <blockquote>Demonstrates independent, <span class="mark">production-minded</span> engineering judgment uncommon for a second-year student</blockquote>
+      </div>
+
+      <p>This demonstrated that the adjectives weren't skipped over and made a difference in the results.</p>
 
       <h2>So can you game it?</h2>
 
