@@ -4,116 +4,86 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Project — Louis Berenyi</title>
+<meta name="description" content="Selected projects by Louis Berenyi: machine-learning optimization, systems tooling, open-source contributions, and full-stack work.">
 <script>try{var t=localStorage.getItem('lb-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  :root{
-    --bg:#f7f6f3; --fg:#191917; --muted:#54534d; --faint:#73716a;
-    --line:rgba(20,20,18,0.14); --card:#ffffff; --card2:#eceae4;
-    --accent:#2b5fd9; --accent-soft:rgba(43,95,217,0.08);
-  }
-  [data-theme="dark"]{
-    --bg:#0c0c0e; --fg:#ededee; --muted:#8c8c92; --faint:#56565c;
-    --line:rgba(255,255,255,0.12); --card:#161619; --card2:#1c1c20;
-    --accent:#7099ff; --accent-soft:rgba(112,153,255,0.13);
-  }
-  body{background:var(--bg);}
-  ::selection{background:var(--accent);color:#fff;}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
-  @keyframes stripe{from{background-position:0 0;}to{background-position:40px 0;}}
-  /* hover behaviors (replace DC style-hover) */
-  .btn{transition:all .15s ease,transform .1s ease;}
-  .btn:hover{color:var(--fg)!important;border-color:var(--fg)!important;}
-  .btn:active{transform:scale(.92);}
-  .flink{transition:color .15s ease,transform .15s ease;}
-  .flink:hover{color:var(--fg)!important;}
-  .ul:hover{border-bottom-color:var(--accent)!important;}
-  .next:hover{color:var(--accent)!important;background:var(--accent-soft)!important;}
-  /* micro-interactions */
-  .arrow{display:inline-block;transition:transform .2s ease;}
-  .next:hover .arrow{transform:translate(3px,-3px);}
-  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
-  .reveal.in{opacity:1;transform:none;}
-  .stagger{opacity:0;transform:translateY(8px);animation:fadeUp .5s ease forwards;}
-  @media (prefers-reduced-motion:reduce){
-    *{animation:none!important;scroll-behavior:auto!important;}
-    .reveal{opacity:1!important;transform:none!important;transition:none!important;}
-    .stagger{opacity:1!important;transform:none!important;animation:none!important;}
-    .next:hover .arrow{transform:none!important;}
-  }
-</style>
+<link rel="canonical" href="https://luidevo.github.io/portfolio/project.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Louis Berenyi">
+<meta property="og:title" content="Projects — Louis Berenyi">
+<meta property="og:description" content="Machine-learning optimization, systems tooling, open-source contributions, and full-stack work.">
+<meta property="og:url" content="https://luidevo.github.io/portfolio/project.html">
+<meta property="og:image" content="https://luidevo.github.io/portfolio/images/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="css/site.css">
 </head>
 <body>
-<div id="top" style="min-height:100vh;background:var(--bg);color:var(--fg);font-family:'Geist','Helvetica Neue',Arial,sans-serif;transition:background .45s ease,color .45s ease;-webkit-font-smoothing:antialiased;">
+<div id="top" class="shell shell--narrow">
 
-  <header style="max-width:720px;margin:0 auto;padding:28px 24px 12px;display:flex;align-items:center;justify-content:space-between;">
-    <a href="index.html" class="flink" style="font-family:'Geist Mono',monospace;font-size:12.5px;letter-spacing:0.06em;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:9px;transition:color .15s ease;">
-      <span style="font-size:14px;">←</span> Index
-    </a>
-    <button id="themeBtn" class="btn" title="Toggle theme" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:15px;cursor:pointer;transition:all .15s ease;"><span id="themeGlyph">☾</span></button>
+  <header class="hdr">
+    <a href="index.html" class="backlink flink"><span class="glyph">←</span> Index</a>
+    <button id="themeBtn" class="btn btn--icon" title="Toggle theme"><span id="themeGlyph">☾</span></button>
   </header>
 
-  <main style="max-width:720px;margin:0 auto;padding:0 24px 40px;animation:fadeUp .6s ease both;">
+  <main class="main main--fade">
 
-    <div style="display:flex;align-items:center;gap:12px;margin:44px 0 0;font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);">
+    <div class="eyebrow">
       <span id="p-num"></span>
-      <span style="width:18px;height:1px;background:var(--line);"></span>
-      <span id="p-kind" style="text-transform:uppercase;letter-spacing:0.1em;"></span>
+      <span class="sep"></span>
+      <span id="p-kind" class="kind"></span>
     </div>
 
-    <h1 id="p-title" style="margin:18px 0 0;font-size:clamp(34px,5.5vw,52px);font-weight:500;letter-spacing:-0.025em;line-height:1.04;"></h1>
-    <p id="p-sub" style="margin:14px 0 0;font-size:18px;line-height:1.5;color:var(--muted);max-width:560px;"></p>
+    <h1 id="p-title" class="h1-page h1-page--gap"></h1>
+    <p id="p-sub" class="lede"></p>
 
-    <div id="p-stack" style="margin-top:26px;display:flex;flex-wrap:wrap;gap:8px;"></div>
+    <div id="p-stack" class="chips chips--stack"></div>
+    <div id="p-links" class="link-row"></div>
 
-    <div id="p-links" style="margin-top:28px;display:flex;flex-wrap:wrap;gap:10px 22px;font-family:'Geist Mono',monospace;font-size:13px;"></div>
-
-    <div id="p-media" style="margin-top:40px;aspect-ratio:16/9;border:1px solid var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;background-color:var(--card2);background-image:repeating-linear-gradient(135deg,transparent 0,transparent 9px,var(--line) 9px,var(--line) 10px);overflow:hidden;">
-      <span id="p-caption" style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--faint);background:var(--bg);padding:6px 12px;border-radius:6px;border:1px solid var(--line);"></span>
+    <div id="p-media" class="media">
+      <span id="p-caption" class="media-cap"></span>
     </div>
 
-    <div class="reveal" style="display:grid;grid-template-columns:130px 1fr;gap:18px;margin-top:54px;">
-      <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint);padding-top:5px;">Overview</div>
+    <div class="detail-grid detail-grid--top reveal">
+      <div class="detail-label">Overview</div>
       <div id="p-overview"></div>
     </div>
 
-    <div class="reveal" style="display:grid;grid-template-columns:130px 1fr;gap:18px;margin-top:40px;padding-top:40px;border-top:1px solid var(--line);">
-      <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint);padding-top:5px;">Highlights</div>
+    <div class="detail-grid detail-grid--rule reveal">
+      <div class="detail-label">Highlights</div>
       <div id="p-highlights"></div>
     </div>
 
-    <div style="display:grid;grid-template-columns:130px 1fr;gap:18px;margin-top:40px;">
-      <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint);padding-top:5px;">Details</div>
-      <div style="display:flex;flex-wrap:wrap;gap:28px 56px;">
+    <div class="detail-grid">
+      <div class="detail-label">Details</div>
+      <div class="detail-cols">
         <div>
-          <div style="font-family:'Geist Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--faint);">Year</div>
-          <div id="p-year" style="margin-top:6px;font-size:15px;color:var(--fg);"></div>
+          <div class="detail-col-label">Year</div>
+          <div id="p-year" class="detail-value"></div>
         </div>
         <div>
-          <div style="font-family:'Geist Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--faint);">Role</div>
-          <div id="p-role" style="margin-top:6px;font-size:15px;color:var(--fg);"></div>
+          <div class="detail-col-label">Role</div>
+          <div id="p-role" class="detail-value"></div>
         </div>
       </div>
     </div>
 
-    <a id="p-next" href="#" class="next reveal" style="display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:64px;padding:28px 22px;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--fg);transition:color .18s ease,background .18s ease;">
+    <a id="p-next" href="#" class="next reveal">
       <div>
-        <div style="font-family:'Geist Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--faint);">Next</div>
-        <div id="p-next-title" style="margin-top:6px;font-size:20px;font-weight:500;letter-spacing:-0.01em;"></div>
+        <div class="next-label">Next</div>
+        <div id="p-next-title" class="next-title"></div>
       </div>
-      <span class="arrow" style="font-family:'Geist Mono',monospace;font-size:18px;color:var(--faint);">↗</span>
+      <span class="arrow arrow--lg">↗</span>
     </a>
 
   </main>
 
-  <footer style="max-width:720px;margin:0 auto;padding:40px 24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--faint);">
-    <a href="index.html" class="flink" style="color:var(--faint);text-decoration:none;transition:color .15s ease;">← Back to index</a>
+  <footer class="ftr">
+    <a href="index.html" class="ftr-link">← Back to index</a>
     <span>© 2026 Louis Berenyi</span>
   </footer>
 
@@ -122,14 +92,13 @@
 <script>
 (function () {
   var root = document.documentElement;
+  var themeBtn = document.getElementById('themeBtn');
+  var themeGlyph = document.getElementById('themeGlyph');
 
-  // --- theme ---
   function stored() { try { return localStorage.getItem('lb-theme'); } catch (e) { return null; } }
   function applyTheme(t) { try { root.setAttribute('data-theme', t); } catch (e) {} }
   var theme = stored() || 'light';
   applyTheme(theme);
-  var themeBtn = document.getElementById('themeBtn');
-  var themeGlyph = document.getElementById('themeGlyph');
   themeGlyph.textContent = theme === 'dark' ? '☀' : '☾';
   themeBtn.addEventListener('click', function () {
     theme = theme === 'dark' ? 'light' : 'dark';
@@ -169,7 +138,7 @@
       sub: 'A tmux-plugin integration and a pane-indexing fix for a 2.2k-star terminal multiplexer.',
       year: '2026', role: 'Contributor',
       stack: ['Rust', 'Systems', 'Open Source'],
-			links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }, { label: 'Merged PR', href: 'https://github.com/Helvesec/rmux/pull/24#issuecomment-4729173377'}],
+      links: [{ label: 'GitHub ↗', href: 'https://github.com/LUIDevo' }, { label: 'Merged PR', href: 'https://github.com/Helvesec/rmux/pull/24#issuecomment-4729173377' }],
       caption: 'terminal panes',
       image: { webp: 'images/rmux.webp', fallback: 'images/rmux.jpg' },
       imagePos: 'top',
@@ -255,7 +224,7 @@
       imageHug: true,
       overview: [
         'spud is a Rust command-line tool that downloads and organizes music from YouTube playlists, with Spotify API integration via an OAuth flow.',
-        'I built it as a simpler, more stable alternative to SpotDL, which had grown error-prone by 2026 due to Spotify API changes.' 
+        'I built it as a simpler, more stable alternative to SpotDL, which had grown error-prone by 2026 due to Spotify API changes.'
       ],
       highlights: [
         'Built as a leaner, more reliable alternative to SpotDL.',
@@ -290,19 +259,13 @@
   if (p.image) {
     var media = document.getElementById('p-media');
     media.innerHTML = '';
-    media.style.backgroundImage = 'none';
-    if (p.imageHug) {
-      media.style.aspectRatio = 'unset';
-      media.style.height = 'auto';
-      media.style.alignItems = 'flex-start';
-      media.style.justifyContent = 'flex-start';
-    }
+    media.classList.add('media--filled');
+    if (p.imageHug) media.classList.add('media--hug');
     var webp = (typeof p.image === 'object') ? p.image.webp : null;
     var fallback = (typeof p.image === 'object') ? p.image.fallback : p.image;
     var holder = media;
     if (webp) {
       var pic = document.createElement('picture');
-      pic.style.cssText = 'display:block;width:100%;height:100%;';
       var src = document.createElement('source');
       src.type = 'image/webp';
       src.srcset = webp;
@@ -315,19 +278,15 @@
     img.alt = p.title;
     img.loading = 'lazy';
     img.decoding = 'async';
-    if (p.imageHug) {
-      img.style.cssText = 'width:100%;height:auto;display:block;';
-    } else {
-      img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;object-position:' + (p.imagePos || 'center') + ';';
-    }
+    if (!p.imageHug) img.style.objectPosition = p.imagePos || 'center';
     holder.appendChild(img);
   }
 
   var stackEl = document.getElementById('p-stack');
   p.stack.forEach(function (tag, i) {
     var el = document.createElement('span');
-    el.className = 'stagger';
-    el.style.cssText = "font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:4px 9px;animation-delay:" + (i * 60) + "ms;";
+    el.className = 'chip chip--stack stagger';
+    el.style.animationDelay = (i * 60) + 'ms';
     el.textContent = tag;
     stackEl.appendChild(el);
   });
@@ -336,7 +295,6 @@
   p.links.forEach(function (lnk) {
     var a = document.createElement('a');
     a.href = lnk.href; a.target = '_blank'; a.rel = 'noopener'; a.className = 'ul';
-    a.style.cssText = 'color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s ease;';
     a.textContent = lnk.label;
     linksEl.appendChild(a);
   });
@@ -348,7 +306,6 @@
     parent.appendChild(document.createTextNode(text.slice(0, idx)));
     var a = document.createElement('a');
     a.href = p.mate.href; a.target = '_blank'; a.rel = 'noopener'; a.className = 'ul';
-    a.style.cssText = 'color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s ease;';
     a.textContent = name;
     parent.appendChild(a);
     parent.appendChild(document.createTextNode(text.slice(idx + name.length)));
@@ -357,7 +314,7 @@
   var ovEl = document.getElementById('p-overview');
   p.overview.forEach(function (para) {
     var el = document.createElement('p');
-    el.style.cssText = 'margin:0 0 16px;font-size:16.5px;line-height:1.62;color:var(--fg);';
+    el.className = 'ov-para';
     fillText(el, para);
     ovEl.appendChild(el);
   });
@@ -365,13 +322,13 @@
   var hlEl = document.getElementById('p-highlights');
   p.highlights.forEach(function (h, i) {
     var row = document.createElement('div');
-    row.className = 'stagger';
-    row.style.cssText = 'display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;padding:14px 0;border-bottom:1px solid var(--line);animation-delay:' + (120 + i * 90) + 'ms;';
+    row.className = 'hl-row stagger';
+    row.style.animationDelay = (120 + i * 90) + 'ms';
     var arrow = document.createElement('span');
-    arrow.style.cssText = "font-family:'Geist Mono',monospace;font-size:12px;color:var(--accent);padding-top:3px;";
+    arrow.className = 'hl-arrow';
     arrow.textContent = '→';
     var txt = document.createElement('span');
-    txt.style.cssText = 'font-size:15.5px;line-height:1.55;color:var(--fg);';
+    txt.className = 'hl-text';
     txt.textContent = h;
     row.appendChild(arrow); row.appendChild(txt);
     hlEl.appendChild(row);

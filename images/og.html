@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OG image source — not a page</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Source for images/og*.png. Each .card below renders as one 1200x630 social
+     card; see DESIGN.md. Render with tools/render-og.sh, do not edit the PNGs. */
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:#fff;}
+  .card{
+    width:1200px;height:630px;
+    background:#f7f6f3;color:#191917;
+    font-family:'Geist','Helvetica Neue',Arial,sans-serif;
+    padding:74px 80px 66px;display:flex;flex-direction:column;
+    -webkit-font-smoothing:antialiased;
+  }
+  .eyebrow{font-family:'Geist Mono',monospace;font-size:21px;letter-spacing:0.14em;text-transform:uppercase;color:#73716a;}
+  .name{font-size:78px;font-weight:500;letter-spacing:-0.025em;line-height:1.0;}
+  .role{font-family:'Geist Mono',monospace;font-size:25px;letter-spacing:0.01em;color:#54534d;margin-top:20px;}
+  .title{font-size:60px;font-weight:500;letter-spacing:-0.025em;line-height:1.1;}
+  .title--sm{font-size:52px;}
+  .spacer{flex:1;}
+  .rule{height:1px;background:rgba(20,20,18,0.14);}
+  .foot{font-family:'Geist Mono',monospace;font-size:21px;color:#73716a;margin-top:22px;display:flex;justify-content:space-between;}
+</style>
+</head>
+<body>
+
+<!-- 1. site card -> images/og.png -->
+<div class="card">
+  <div class="spacer"></div>
+  <div class="name">Louis Berenyi</div>
+  <div class="role">Computer Science (Co-op) · University of Ottawa</div>
+  <div class="spacer"></div>
+  <div class="rule"></div>
+  <div class="foot"><span>luidevo.github.io/portfolio</span><span>Systems · ML · Open source</span></div>
+</div>
+
+<!-- 2. post A1 -> images/og-transformer.png -->
+<div class="card">
+  <div class="eyebrow">A1 · ML / Quantization</div>
+  <div class="spacer"></div>
+  <div class="title">Fitting a transformer into 16&nbsp;megabytes</div>
+  <div class="spacer"></div>
+  <div class="rule"></div>
+  <div class="foot"><span>Louis Berenyi</span><span>Jul 2026 · 6 min</span></div>
+</div>
+
+<!-- 3. post A2 -> images/og-resume-screener.png -->
+<div class="card">
+  <div class="eyebrow">A2 · LLMs / Evaluation</div>
+  <div class="spacer"></div>
+  <div class="title title--sm">Can you talk your way past an AI resume screener?</div>
+  <div class="spacer"></div>
+  <div class="rule"></div>
+  <div class="foot"><span>Louis Berenyi</span><span>Jul 2026 · 7 min</span></div>
+</div>
+
+</body>
+</html>

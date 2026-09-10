@@ -2,9 +2,12 @@
 
 The rules this site is built from, extracted from the live pages. Live
 specimens with both themes: [`styleguide.html`](styleguide.html) (internal,
-not linked from the site). Blog posts get all of this from `css/post.css`;
-the older pages (`index.html`, `project.html`, `writing.html`) carry the same
-values inline.
+not linked from the site).
+
+Every page links `css/site.css`, which owns all the tokens and the shared
+components below. Reading pages link `css/post.css` as well, which adds
+article prose, figures and charts. No page redefines a token and no page
+carries a style attribute except as a one-off specimen or data value.
 
 ## Principles
 
@@ -35,8 +38,36 @@ values inline.
 | `--accent` | `#2b5fd9` | `#7099ff` | interactive |
 | `--accent-soft` | `rgba(43,95,217,.08)` | `rgba(112,153,255,.13)` | hover wash, inline-code bg |
 
-Chart-only tokens (in `css/post.css`): `--chart-surface` (= `--card`),
+Chart-only tokens (also in `css/site.css`): `--chart-surface` (= `--card`),
 `--chart-grid`, `--chart-axis`, `--series-1`, `--series-2`.
+
+Type tokens: `--ui-font` and `--display-font` (both Geist) and `--mono`
+(Geist Mono). Nothing hardcodes a font stack outside `css/site.css`.
+
+## Files
+
+| File | What it is |
+|---|---|
+| `css/site.css` | all tokens, the page shell, every shared component |
+| `css/post.css` | article prose, figures, chart and stat styles. Posts and `styleguide.html` only |
+| `js/charts.js` | chart renderer (`renderLineChart`, `renderBarChart`) |
+| `images/og.html` | source for the three social cards. Not a page |
+| `tools/render-og.sh` | renders `images/og.html` into `images/og*.png` |
+| `styleguide.html` | live specimens, `noindex`, not linked from the site |
+
+## Sharing
+
+Every page carries `canonical`, `og:*` and `twitter:card` tags pointing at
+`https://luidevo.github.io/portfolio/`. Social cards are 1200x630 PNGs in
+`images/`. To change one, edit `images/og.html` and run
+`bash tools/render-og.sh`; never edit the PNGs by hand.
+
+Cards are strictly typographic — paper ground, near-black name, mono
+metadata, hairline rules. No accent color, per the accent rule above.
+
+`project.html` is a single document for all six projects, so every project
+URL shares one card. Per-project cards would need one static file per
+project, since crawlers do not run the JS that fills in the page.
 
 ## Type scale
 
@@ -149,10 +180,24 @@ Past six, fold categories into "Other" or split into small multiples.
 
 ## Adding a blog post
 
-1. Copy `posts/fitting-a-transformer-into-16mb.html` as the template — it
-   links `../css/post.css` and `../js/charts.js` and carries the standard
-   header (← Writing), meta row, title, deck, `.prose` article, footer.
-2. List the post in `writing.html` (card row) and, if it should be featured,
+1. Copy an existing post as the template. It links `../css/site.css` and
+   `../css/post.css`, loads `../js/charts.js`, and carries the standard
+   header (← Writing), the `.eyebrow` meta row, `.h1-post` title, `.lede`
+   deck, a `.prose` article, and the footer.
+2. Add the `canonical`, `og:*` and `twitter:card` tags, plus a card in
+   `images/og.html` rendered via `bash tools/render-og.sh`.
+3. List the post in `writing.html` (card row) and, if it should be featured,
    in the index Writing section; bump the section count.
-3. Add a ⌘K entry for it in `index.html`.
-4. Charts: real data only, or say so in the caption. Check both themes.
+4. Add a ⌘K entry for it in `index.html`.
+5. Charts: real data only, or say so in the caption. Check both themes.
+
+`posts/fitting-a-transformer-into-16mb.html` is on disk but matched by
+`.gitignore`, so it is not on the deployed site and is hidden from both
+post lists. Commit it (`git add -f`) and restore its card rows and its ⌘K
+entry before using it as the template.
+
+## Changing a style
+
+Change it in `css/site.css` once. If a value appears in two places, one of
+them is a bug. New colors need both a light and a dark value in the token
+block at the top of that file.
