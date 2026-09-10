@@ -186,6 +186,15 @@
       <div class="list">
 
         <div class="exp-row">
+          <div class="exp-date">Summer 2026</div>
+          <div>
+            <div class="compact-title">Undergraduate Researcher, Computational Neuroscience</div>
+            <div class="exp-org">University of Waterloo</div>
+            <p class="exp-note">Built a spiking neural network in a biological neural framework called Nengo that models the mouse baroreflex, the feedback loop that regulates blood pressure, and the circulatory system it controls.</p>
+          </div>
+        </div>
+
+        <div class="exp-row">
           <div class="exp-date">2025 — 2029</div>
           <div>
             <div class="compact-title">BSc, Computer Science (Co-op)</div>
@@ -245,7 +254,6 @@
   </main>
 
   <footer class="ftr">
-    <span>Toronto, ON · <span id="clock"></span></span>
     <span>© 2026 Louis Berenyi</span>
   </footer>
 
@@ -284,15 +292,6 @@
     themeGlyph.classList.add('swap');
   }
   themeBtn.addEventListener('click', toggleTheme);
-
-  // --- clock ---
-  var clockEl = document.getElementById('clock');
-  function now() {
-    try { return new Date().toLocaleTimeString('en-CA', { hour12: false, timeZone: 'America/Toronto' }); }
-    catch (e) { return new Date().toLocaleTimeString(); }
-  }
-  clockEl.textContent = now();
-  setInterval(function () { clockEl.textContent = now(); }, 1000);
 
   // --- command menu ---
   var overlay = document.getElementById('cmdOverlay');
