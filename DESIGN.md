@@ -16,7 +16,7 @@ carries a style attribute except as a one-off specimen or data value.
   text, code. Prose never sets in mono; mono is never body-sized.
 - **One accent, interactive-only.** The blue means "you can act here": links,
   hovers, the blockquote rule. It never colors headings, body text, or
-  decoration.
+  decoration. The one exception is the brand shimmer, below.
 - **Hairlines do the structure.** 1px `--line` rules separate everything;
   raised surfaces get 8–12px radius and no shadows.
 - **Motion is feedback.** Hover states and one entry fade. Nothing animates on
@@ -96,6 +96,16 @@ Column: 760px max on the index, 720px on subpages, side padding 24px.
 - **Pill** — CTA. 1px accent border, radius 999, mono 13px, accent text.
   Hover: soft wash + 2px lift.
 - **Chip** — tech tag. Mono 11px, 1px `--line` border, radius 5px, muted.
+- **Brand shimmer** — the only colored non-interactive text on the site: Rust
+  and Neovim in the index stack list. Each word carries its own hues
+  (`--shim-rust-*`, `--shim-nvim-*`) painted through `background-clip: text`,
+  inside a 220% gradient box that slides once every 7s, so a highlight band
+  travels through the word and then rests. The rule that keeps it legal: every
+  stop clears 4.5:1 against `--bg` in both themes, which is why the light set
+  is darker than the logos and the dark set is brighter. Neovim carries a
+  negative `animation-delay` so the two never sweep together. Under
+  `prefers-reduced-motion` the sweep stops and the full gradient sits visible.
+  Do not extend this to other words without re-checking all of the stops.
 - **Buttons (`.btn`)** — 34px square, 1px border, radius 8, mono. Hover:
   border and text to `--fg`; active: scale 0.92. Used for ⌘K and theme toggle.
 - **⌘K palette** — overlay + card panel; active item gets accent text on
