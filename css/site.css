@@ -34,9 +34,10 @@
   --series-5: #4a3aa7;   /* violet  */
   --series-6: #eb6834;   /* orange  */
   /* brand shimmer stops (index stack list) — every stop clears 4.5:1 on --bg.
-     The peak is the Rust orange #ce412b nudged to #c63e27, which is 4.72:1
-     instead of 4.40:1 and is the closest pass to the logo colour. */
-  --shim-rust-1: #9c3018; --shim-rust-2: #b83a24; --shim-rust-3: #c63e27;
+     The Rust orange #ce412b is only 4.40:1 on this ground, so the set is pushed
+     up to the ceiling instead: #c84427 is the lightest orange that still passes
+     AA, and the base sits just under it. Any lighter means going under 4.5:1. */
+  --shim-rust-1: #b83a24; --shim-rust-2: #c54122; --shim-rust-3: #c84427;
   --shim-nvim-1: #2f6b24; --shim-nvim-2: #187a80; --shim-nvim-3: #0b6fa4;
 }
 
@@ -54,7 +55,7 @@
   --series-5: #9085e9;   /* violet  */
   --series-6: #d95926;   /* orange  */
   /* brighter brand stops so the same gradients hold up on the dark ground */
-  --shim-rust-1: #d1581f; --shim-rust-2: #f0743a; --shim-rust-3: #ffb27a;
+  --shim-rust-1: #ef7038; --shim-rust-2: #ff9257; --shim-rust-3: #ffc299;
   --shim-nvim-1: #57a143; --shim-nvim-2: #16b0ed; --shim-nvim-3: #7ce0ff;
 }
 
@@ -264,19 +265,35 @@ body { background: var(--bg); }
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  animation: shimmer 7s ease-in-out infinite;
+  animation: shimmer 5s ease-in-out infinite;
 }
 .shimmer--rust { --shim-1: var(--shim-rust-1); --shim-2: var(--shim-rust-2); --shim-3: var(--shim-rust-3); }
-/* negative delay starts Neovim mid-cycle, so the two words never sweep together
-   and neither jumps when its animation begins */
-.shimmer--nvim { --shim-1: var(--shim-nvim-1); --shim-2: var(--shim-nvim-2); --shim-3: var(--shim-nvim-3); animation-delay: -3.2s; }
+/* half a cycle out of phase with Rust, so the two words take turns and a sweep
+   is always either crossing or about to cross */
+.shimmer--nvim { --shim-1: var(--shim-nvim-1); --shim-2: var(--shim-nvim-2); --shim-3: var(--shim-nvim-3); animation-delay: -2.5s; }
 /* selected text needs an opaque fill, or background-clip:text hides it */
 .shimmer::selection { -webkit-text-fill-color: #fff; color: #fff; }
 
+/* Ferris, the Rust mascot, sitting before the Rust word. An <img> rather than
+   inline SVG so index.html stays readable, and rather than a CSS mask because
+   Chromium refuses to fetch a mask over file://. The artwork is CC0
+   (rustacean.net) and brings its own palette: rgb(247,76,0) body,
+   rgb(165,43,0) edges, white eyes.
+
+   vertical-align is a length, not middle. The crab ink is inset about 11% top
+   and bottom of its viewBox, so middle would centre the padded box and land the
+   crab 1.5px below the word: measured against the rendered ink of "Rust",
+   -0.155em puts the two centres in the same place. Re-measure if the artwork or
+   the list font-size ever changes. */
+.stack-logo {
+  display: inline-block; width: 1.5em; height: 1em;
+  vertical-align: -0.155em; margin-right: 0.42em;
+}
+
 @keyframes shimmer {
-  /* hold, then glide: the visible part of the travel is roughly the middle 45%,
-     so each word shimmers for about 1.4s in every 7s */
-  0%, 55% { background-position: 183.3333% 0; }
+  /* 1s hold, then a 4s glide. The highlight sits on the word for about half the
+     glide, so each word shimmers roughly 2s in every 5s. */
+  0%, 20% { background-position: 183.3333% 0; }
   100% { background-position: 0% 0; }
 }
 

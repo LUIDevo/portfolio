@@ -52,6 +52,7 @@ Type tokens: `--ui-font` and `--display-font` (both Geist) and `--mono`
 | `css/post.css` | article prose, figures, chart and stat styles. Posts and `styleguide.html` only |
 | `js/charts.js` | chart renderer (`renderLineChart`, `renderBarChart`) |
 | `images/og.html` | source for the three social cards. Not a page |
+| `images/ferris.svg` | Ferris, the Rust mascot (CC0). Used by `.stack-logo` |
 | `tools/render-og.sh` | renders `images/og.html` into `images/og*.png` |
 | `styleguide.html` | live specimens, `noindex`, not linked from the site |
 
@@ -99,13 +100,21 @@ Column: 760px max on the index, 720px on subpages, side padding 24px.
 - **Brand shimmer** — the only colored non-interactive text on the site: Rust
   and Neovim in the index stack list. Each word carries its own hues
   (`--shim-rust-*`, `--shim-nvim-*`) painted through `background-clip: text`,
-  inside a 220% gradient box that slides once every 7s, so a highlight band
-  travels through the word and then rests. The rule that keeps it legal: every
-  stop clears 4.5:1 against `--bg` in both themes, which is why the light set
-  is darker than the logos and the dark set is brighter. Neovim carries a
-  negative `animation-delay` so the two never sweep together. Under
-  `prefers-reduced-motion` the sweep stops and the full gradient sits visible.
-  Do not extend this to other words without re-checking all of the stops.
+  inside a 220% gradient box that slides once every 5s: a 1s hold, then a 4s
+  glide, so the highlight sits on the word for about 2s. Neovim runs half a
+  cycle out of phase, so the two take turns. Ferris (`.stack-logo`) sits before
+  the Rust word as an `<img>` of `images/ferris.svg`, which is CC0 artwork and
+  carries its own palette rather than a token. It is an `<img>` rather than
+  inline SVG so the markup stays readable, and rather than a masked background
+  because Chromium will not fetch a CSS mask over `file://`, which made the mark
+  disappear when the page was opened from disk.
+
+  The rule that keeps it legal: every stop clears 4.5:1 against `--bg` in both
+  themes. That ceiling is what fixes the light-theme Rust set: the Rust orange
+  `#ce412b` is only 4.40:1 on paper, so the set runs `#b83a24` to `#c84427`,
+  the lightest orange that still passes. The dark set has room and runs well
+  brighter. Under `prefers-reduced-motion` the sweep stops and the full gradient
+  sits visible. Do not extend this to other words without re-checking every stop.
 - **Buttons (`.btn`)** — 34px square, 1px border, radius 8, mono. Hover:
   border and text to `--fg`; active: scale 0.92. Used for ⌘K and theme toggle.
 - **⌘K palette** — overlay + card panel; active item gets accent text on
